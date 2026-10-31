@@ -63,10 +63,17 @@ export async function downloadResumePDF() {
 
   // Contact line
   doc.setFontSize(8.5);
+  const emailDisplay = personalProfile.isEmailVerified && personalProfile.email
+    ? personalProfile.email
+    : 'Email: Available Upon Request';
+  const phoneDisplay = personalProfile.isPhonePublic
+    ? `WhatsApp: ${personalProfile.phone}`
+    : 'Contact: Available Upon Request';
+
   const contactText = [
     personalProfile.location,
-    `WhatsApp: ${personalProfile.phone}`,
-    personalProfile.email,
+    phoneDisplay,
+    emailDisplay,
     'github.com/Sihab75',
     'linkedin.com/in/korimul-jaman-16845535b'
   ].join('  |  ');
@@ -195,8 +202,8 @@ export async function downloadResumePDF() {
   doc.setTextColor(...primaryColor);
   const cpLines = [
     '• Codeforces: codeforces.com/profile/korimuljaman (Rating: 693 | 74+ Problems Solved in C++)',
-    '• CodeChef: codechef.com/users/sihab_75',
-    '• LeetCode: leetcode.com/u/Korimul/',
+    '• CodeChef: codechef.com/users/sihab_75 (Rating: 1417 | Division 3)',
+    '• LeetCode: leetcode.com/u/Korimul/ (Problem Solving Practice)',
     '• GitHub: github.com/Sihab75 (Active project repositories in Kotlin, Python, and C++)'
   ];
   cpLines.forEach(l => {

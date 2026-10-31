@@ -46,12 +46,12 @@ doc.setTextColor(...secondaryColor);
 doc.text('Computer Science & Engineering Student | Aspiring Software Engineer', margin, y);
 y += 16;
 
-// Contact info bar
+// Contact info bar (Privacy-conscious, no unverified email)
 doc.setFontSize(9.5);
 const contactItems = [
   'Dhaka, Bangladesh',
   'WhatsApp: +880 1728-694997',
-  'Email: korimuljaman.cse@gmail.com (Editable)',
+  'Email: Available Upon Request',
   'GitHub: github.com/Sihab75',
   'LinkedIn: linkedin.com/in/korimul-jaman-16845535b'
 ];
@@ -262,7 +262,7 @@ doc.setFont('helvetica', 'normal');
 doc.setFontSize(9);
 doc.setTextColor(...primaryColor);
 const p3Bullets = [
-  'Solved 70+ algorithmic problems across Codeforces, CodeChef, and LeetCode focusing on optimal time and space complexity.',
+  'Solved 74+ algorithmic problems across Codeforces, CodeChef, and LeetCode focusing on optimal time and space complexity.',
   'Implemented fundamental data structures and algorithmic patterns in modern C++.'
 ];
 p3Bullets.forEach(b => {
@@ -280,10 +280,10 @@ doc.setFontSize(9);
 doc.setTextColor(...primaryColor);
 
 const cpProfiles = [
-  '• Codeforces: codeforces.com/profile/korimuljaman  (Rating: 693 | 74+ Problems Solved)',
-  '• CodeChef: codechef.com/users/sihab_75',
-  '• LeetCode: leetcode.com/u/Korimul/',
-  '• VJudge / AtCoder: Profiles in active setup for ongoing algorithmic contests'
+  '• Codeforces: codeforces.com/profile/korimuljaman  (Rating: 693 | 74+ Problems Solved in C++)',
+  '• CodeChef: codechef.com/users/sihab_75  (Rating: 1417 | Division 3)',
+  '• LeetCode: leetcode.com/u/Korimul/  (Problem Solving Practice)',
+  '• GitHub: github.com/Sihab75  (Active project repositories in Kotlin, Python, and C++)'
 ];
 cpProfiles.forEach(p => {
   doc.text(p, margin + 8, y);
@@ -294,4 +294,4 @@ cpProfiles.forEach(p => {
 const pdfBytes = doc.output();
 const targetPath = path.resolve('public', 'Md_Korimul_Jaman_Resume.pdf');
 fs.writeFileSync(targetPath, Buffer.from(pdfBytes, 'binary'));
-console.log('PDF successfully generated at:', targetPath);
+console.log('PDF successfully verified & regenerated at:', targetPath);

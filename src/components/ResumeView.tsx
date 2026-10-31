@@ -12,6 +12,14 @@ export const ResumeView: React.FC = () => {
     window.print();
   };
 
+  const emailDisplay = personalProfile.isEmailVerified && personalProfile.email
+    ? personalProfile.email
+    : 'Available Upon Request';
+
+  const phoneDisplay = personalProfile.isPhonePublic
+    ? personalProfile.phone
+    : 'Available Upon Request';
+
   return (
     <div className="w-full max-w-4xl mx-auto">
       {/* Action Toolbar */}
@@ -69,11 +77,11 @@ export const ResumeView: React.FC = () => {
             </span>
             <span className="flex items-center gap-1">
               <Phone className="w-3.5 h-3.5 text-slate-500" />
-              {personalProfile.phone}
+              {phoneDisplay}
             </span>
             <span className="flex items-center gap-1">
               <Mail className="w-3.5 h-3.5 text-slate-500" />
-              {personalProfile.email}
+              {emailDisplay}
             </span>
             <a
               href={personalProfile.githubUrl}
@@ -208,6 +216,7 @@ export const ResumeView: React.FC = () => {
               <a href={personalProfile.codechefUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                 codechef.com/users/{personalProfile.codechefHandle}
               </a>
+              <span className="text-slate-600"> (Rating: 1417, Division 3)</span>
             </div>
             <div>
               <span className="font-bold text-slate-900">LeetCode: </span>

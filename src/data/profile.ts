@@ -4,7 +4,7 @@ import type { Profile } from '../types';
  * ============================================================================
  * CENTRAL PROFILE CONFIGURATION
  * ============================================================================
- * All personal details, social links, and contact channels are centralized here.
+ * All personal details, social links, and privacy settings are centralized here.
  * You can edit any field here to instantly update the entire website and resume.
  */
 export const personalProfile: Profile = {
@@ -18,16 +18,19 @@ export const personalProfile: Profile = {
   country: 'Bangladesh',
   location: 'Dhaka, Bangladesh',
   
-  // Verified Contact & Social Links
+  // Contact Information & Privacy Flags
   phone: '+880 1728-694997',
   whatsApp: '+8801728694997',
-  
+  isPhonePublic: true, // Set to false if you wish to mask your phone number on the public website
+
   /**
    * Email Address:
-   * NOTE: Set your preferred email address below. It will automatically update
-   * the contact buttons, footer, and resume.
+   * Leave empty or set your verified email below.
+   * If isEmailVerified is false, the website will display 'Available upon request'
+   * to protect your privacy and prevent publishing unverified email addresses.
    */
-  email: 'korimuljaman.cse@gmail.com', // [EDITABLE PLACEHOLDER: Update with your primary email]
+  email: '', // [EDITABLE: Enter your email address here, e.g. 'yourname@example.com']
+  isEmailVerified: false, // Set to true once you have entered your verified email above
 
   careerGoal: 'Software Engineer',
   areasOfInterest: [
@@ -38,7 +41,7 @@ export const personalProfile: Profile = {
     'Mobile Application Architecture'
   ],
   
-  // Real GitHub avatar with local fallback
+  // Real GitHub avatar
   avatarUrl: 'https://avatars.githubusercontent.com/u/219392843?v=4',
   
   // Verified Profiles
@@ -55,11 +58,11 @@ export const personalProfile: Profile = {
   leetcodeHandle: 'Korimul',
   leetcodeUrl: 'https://leetcode.com/u/Korimul/',
   
-  // Optional / Future Platforms
-  atcoderHandle: 'korimuljaman',
-  atcoderUrl: 'https://atcoder.jp/users/korimuljaman', // [EDITABLE PLACEHOLDER]
-  vjudgeHandle: 'korimuljaman',
-  vjudgeUrl: 'https://vjudge.net/user/korimuljaman',   // [EDITABLE PLACEHOLDER]
+  // Optional / Future Platforms (Base URLs to avoid 404s until handles are registered)
+  atcoderHandle: '',
+  atcoderUrl: 'https://atcoder.jp',
+  vjudgeHandle: '',
+  vjudgeUrl: 'https://vjudge.net',
 
   bio: 'Computer Science & Engineering student at Green University of Bangladesh (Batch 251) driven by a passion for algorithmic problem solving, clean software architecture, and modern mobile engineering. Focused on writing robust, maintainable code in C++, Kotlin, and Python.',
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, MessageSquare, Send, Check, Copy, ExternalLink } from 'lucide-react';
+import { Mail, MessageSquare, Send, Check, Copy, ExternalLink, ShieldAlert } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '../components/Icons';
 import { SectionHeader } from '../components/SectionHeader';
 import { personalProfile } from '../data/profile';
@@ -18,16 +18,22 @@ export const Contact: React.FC = () => {
   const cleanPhone = personalProfile.whatsApp.replace(/[^0-9]/g, '');
   const whatsAppUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent('Hello Korimul, I reviewed your developer portfolio and resume.')}`;
 
+  const hasEmail = personalProfile.isEmailVerified && personalProfile.email.trim().length > 0;
+
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText(personalProfile.email);
-    setCopiedEmail(true);
-    setTimeout(() => setCopiedEmail(false), 2000);
+    if (hasEmail) {
+      navigator.clipboard.writeText(personalProfile.email);
+      setCopiedEmail(true);
+      setTimeout(() => setCopiedEmail(false), 2000);
+    }
   };
 
   const handleCopyPhone = () => {
-    navigator.clipboard.writeText(personalProfile.phone);
-    setCopiedPhone(true);
-    setTimeout(() => setCopiedPhone(false), 2000);
+    if (personalProfile.isPhonePublic) {
+      navigator.clipboard.writeText(personalProfile.phone);
+      setCopiedPhone(true);
+      setTimeout(() => setCopiedPhone(false), 2000);
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -37,17 +43,20 @@ export const Contact: React.FC = () => {
       return;
     }
 
-    // Compose mailto URI
-    const subject = encodeURIComponent(formData.subject || `Inquiry from Portfolio - ${formData.name}`);
-    const body = encodeURIComponent(
-      `Hello Korimul,\n\n${formData.message}\n\nBest regards,\n${formData.name}\nEmail: ${formData.senderEmail || 'Not provided'}`
-    );
-    const mailtoUrl = `mailto:${personalProfile.email}?subject=${subject}&body=${body}`;
+    const fullDraft = `Subject: ${formData.subject || 'Portfolio Inquiry'}\n\nHello Korimul,\n\n${formData.message}\n\nFrom: ${formData.name}\nReply-To: ${formData.senderEmail || 'Not provided'}`;
 
-    // Open mail client
-    window.location.href = mailtoUrl;
-
-    setSubmittedStatus('Mail client triggered! A pre-filled draft was prepared for you.');
+    if (hasEmail) {
+      const subject = encodeURIComponent(formData.subject || `Inquiry from Portfolio - ${formData.name}`);
+      const body = encodeURIComponent(
+        `Hello Korimul,\n\n${formData.message}\n\nBest regards,\n${formData.name}\nEmail: ${formData.senderEmail || 'Not provided'}`
+      );
+      window.location.href = `mailto:${personalProfile.email}?subject=${subject}&body=${body}`;
+      setSubmittedStatus('Email client draft launched successfully!');
+    } else {
+      // Email is pending approval, so copy text to clipboard and prompt user
+      navigator.clipboard.writeText(fullDraft);
+      setSubmittedStatus('Message draft copied to clipboard! You can send it via WhatsApp or LinkedIn, or configure your primary email in src/data/profile.ts.');
+    }
   };
 
   return (
@@ -63,46 +72,48 @@ export const Contact: React.FC = () => {
           {/* Left Column: Direct Contact Channels */}
           <div className="lg:col-span-5 flex flex-col gap-4">
             {/* WhatsApp Card */}
-            <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-emerald-500/40 transition-colors">
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-3">
-                  <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
-                    <MessageSquare className="w-5 h-5" />
+            {personalProfile.isPhonePublic && (
+              <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-emerald-500/40 transition-colors">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+                      <MessageSquare className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-slate-900 dark:text-white">
+                        WhatsApp Instant Chat
+                      </h4>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">
+                        Direct messaging channel
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-slate-900 dark:text-white">
-                      WhatsApp Instant Chat
-                    </h4>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">
-                      Direct messaging channel
-                    </p>
-                  </div>
+                  <button
+                    onClick={handleCopyPhone}
+                    type="button"
+                    aria-label="Copy phone number"
+                    className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                    title="Copy number"
+                  >
+                    {copiedPhone ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
+                  </button>
                 </div>
-                <button
-                  onClick={handleCopyPhone}
-                  type="button"
-                  aria-label="Copy phone number"
-                  className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                  title="Copy number"
+
+                <div className="font-mono text-sm font-semibold text-slate-800 dark:text-slate-200 mb-3">
+                  {personalProfile.phone}
+                </div>
+
+                <a
+                  href={whatsAppUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 text-white transition-colors shadow-sm"
                 >
-                  {copiedPhone ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
-                </button>
+                  <MessageSquare className="w-4 h-4" />
+                  <span>Open WhatsApp Chat</span>
+                </a>
               </div>
-
-              <div className="font-mono text-sm font-semibold text-slate-800 dark:text-slate-200 mb-3">
-                {personalProfile.phone}
-              </div>
-
-              <a
-                href={whatsAppUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 text-white transition-colors shadow-sm"
-              >
-                <MessageSquare className="w-4 h-4" />
-                <span>Open WhatsApp Chat</span>
-              </a>
-            </div>
+            )}
 
             {/* Email Card */}
             <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-cyan-500/40 transition-colors">
@@ -116,32 +127,41 @@ export const Contact: React.FC = () => {
                       Primary Email
                     </h4>
                     <p className="text-xs text-slate-500 dark:text-slate-400">
-                      Editable in src/data/profile.ts
+                      {hasEmail ? 'Verified contact channel' : 'Pending user confirmation'}
                     </p>
                   </div>
                 </div>
-                <button
-                  onClick={handleCopyEmail}
-                  type="button"
-                  aria-label="Copy email address"
-                  className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                  title="Copy email"
-                >
-                  {copiedEmail ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
-                </button>
+                {hasEmail && (
+                  <button
+                    onClick={handleCopyEmail}
+                    type="button"
+                    aria-label="Copy email address"
+                    className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                    title="Copy email"
+                  >
+                    {copiedEmail ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
+                  </button>
+                )}
               </div>
 
               <div className="font-mono text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 mb-3 break-all">
-                {personalProfile.email}
+                {hasEmail ? personalProfile.email : 'Available Upon Request'}
               </div>
 
-              <a
-                href={`mailto:${personalProfile.email}`}
-                className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl text-xs font-semibold bg-slate-900 text-white dark:bg-white dark:text-slate-900 hover:bg-cyan-600 dark:hover:bg-cyan-400 transition-colors shadow-sm"
-              >
-                <Mail className="w-4 h-4" />
-                <span>Send Direct Email</span>
-              </a>
+              {hasEmail ? (
+                <a
+                  href={`mailto:${personalProfile.email}`}
+                  className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl text-xs font-semibold bg-slate-900 text-white dark:bg-white dark:text-slate-900 hover:bg-cyan-600 dark:hover:bg-cyan-400 transition-colors shadow-sm"
+                >
+                  <Mail className="w-4 h-4" />
+                  <span>Send Direct Email</span>
+                </a>
+              ) : (
+                <div className="flex items-center gap-2 p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-700 dark:text-amber-300">
+                  <ShieldAlert className="w-4 h-4 shrink-0" />
+                  <span>Email placeholder active. Set your verified address in <code>src/data/profile.ts</code> to enable direct email clicks.</span>
+                </div>
+              )}
             </div>
 
             {/* Social Grid */}
@@ -181,7 +201,7 @@ export const Contact: React.FC = () => {
                 Send a Direct Message
               </h3>
               <p className="text-xs text-slate-500 dark:text-slate-400 mb-6">
-                Fill out the fields below to launch a pre-composed message directly in your mail application.
+                Fill out the fields below to prepare a message draft.
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -252,7 +272,7 @@ export const Contact: React.FC = () => {
                   className="w-full inline-flex items-center justify-center gap-2 py-3 px-6 rounded-xl font-bold text-xs uppercase tracking-wider text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 shadow-md transition-all cursor-pointer"
                 >
                   <Send className="w-4 h-4" />
-                  <span>Draft Message to {personalProfile.fullName}</span>
+                  <span>{hasEmail ? `Draft Email to ${personalProfile.fullName}` : 'Copy Message Draft & Prepare'}</span>
                 </button>
               </form>
             </div>

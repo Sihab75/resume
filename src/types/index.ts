@@ -10,7 +10,9 @@ export interface Profile {
   location: string;
   phone: string;
   whatsApp: string;
-  email: string; // clearly labeled configurable
+  isPhonePublic: boolean;
+  email: string;
+  isEmailVerified: boolean;
   careerGoal: string;
   areasOfInterest: string[];
   avatarUrl: string;

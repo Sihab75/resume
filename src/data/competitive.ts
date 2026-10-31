@@ -16,9 +16,11 @@ export const competitiveProfilesData: CompetitiveProfile[] = [
     platform: 'CodeChef',
     handle: 'sihab_75',
     profileUrl: 'https://www.codechef.com/users/sihab_75',
-    badge: 'Contestant',
+    badge: 'Div 3 (1-Star)',
+    rating: 1417,
+    rank: 'Div 3',
     isVerified: true,
-    note: 'Regular participation in Starters contests and practice problem sets.'
+    note: 'Active contestant in CodeChef Starters and Division 3 algorithmic rounds.'
   },
   {
     platform: 'LeetCode',
@@ -30,18 +32,18 @@ export const competitiveProfilesData: CompetitiveProfile[] = [
   },
   {
     platform: 'AtCoder',
-    handle: 'korimuljaman',
-    profileUrl: 'https://atcoder.jp/users/korimuljaman',
-    badge: 'Contest Ready',
+    handle: '[Setup Pending]',
+    profileUrl: 'https://atcoder.jp',
+    badge: 'Placeholder',
     isVerified: false,
-    note: 'Configured profile for Beginner Contests (ABC). Update link if handle differs.'
+    note: 'Account handle pending user configuration. Update in src/data/competitive.ts once your handle is registered.'
   },
   {
     platform: 'VJudge',
-    handle: 'korimuljaman',
-    profileUrl: 'https://vjudge.net/user/korimuljaman',
-    badge: 'University Contests',
+    handle: '[Setup Pending]',
+    profileUrl: 'https://vjudge.net',
+    badge: 'Placeholder',
     isVerified: false,
-    note: 'Used for university lab contests and virtual contest problem sets.'
+    note: 'Account handle pending user configuration. Update in src/data/competitive.ts once your handle is registered.'
   }
 ];
