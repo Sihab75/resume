@@ -68,7 +68,7 @@ async function testRedesign() {
   // New Redesign Features
   assert(bundledJs.includes('animate-marquee'), 'Animated marquee class present in bundle');
   assert(bundledJs.includes('How I Build &') || bundledJs.includes('Solve Problems'), 'Services / Core Competencies section present in bundle');
-  assert(bundledJs.includes('Open to opportunities'), 'Status badge present in bundle');
+  assert(bundledJs.includes('Open to Software Engineering Opportunities') || bundledJs.includes('Open to opportunities'), 'Status badge present in bundle');
   assert(bundledJs.includes('Download Resume'), 'Resume download triggers present in bundle');
 
   // CSS Check

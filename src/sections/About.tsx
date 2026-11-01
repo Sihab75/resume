@@ -4,7 +4,8 @@ import {
   GraduationCap, 
   Code2, 
   Trophy, 
-  BookOpen
+  BookOpen,
+  Sparkles
 } from 'lucide-react';
 import { personalProfile } from '../data/profile';
 import { downloadResumePDF } from '../utils/pdfGenerator';
@@ -12,21 +13,20 @@ import heroImg from '../assets/hero.png';
 
 export const About: React.FC = () => {
   return (
-    <section id="about" className="py-12 md:py-16 overflow-hidden">
-      {/* Container Card inspired by reference */}
-      <div className="w-[92%] max-w-7xl mx-auto rounded-[2.25rem] p-6 sm:p-8 md:p-12 bg-gradient-to-br from-pink-50/70 via-slate-50/90 to-white/95 dark:from-black dark:via-slate-900/90 dark:to-black border border-red-100/70 dark:border-zinc-800/80 shadow-xl shadow-red-500/5">
+    <section id="about" className="py-16 md:py-24 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="flex flex-col lg:flex-row gap-10 lg:gap-14 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           
-          {/* Left Column: Profile Card + Student Metadata Timeline */}
-          <div className="w-full lg:w-5/12 flex flex-col items-center lg:items-start space-y-6">
+          {/* Left Column: Visual Card & Academic Credentials */}
+          <div className="lg:col-span-5 flex flex-col items-center lg:items-start space-y-6">
             
-            {/* Developer Illustration / Portrait Card */}
-            <div className="w-full max-w-sm rounded-2xl overflow-hidden bg-slate-100 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 shadow-md p-3 relative group">
-              <div className="w-full h-56 sm:h-64 rounded-xl overflow-hidden bg-slate-200 dark:bg-zinc-800 flex items-center justify-center">
+            {/* Visual Portrait Card */}
+            <div className="w-full max-w-sm rounded-3xl overflow-hidden bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 shadow-md p-3 relative group">
+              <div className="w-full h-64 sm:h-72 rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-950 flex items-center justify-center">
                 <img
                   src={heroImg}
-                  alt="Md. Korimul Jaman"
+                  alt={personalProfile.fullName}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = personalProfile.avatarUrl;
@@ -34,137 +34,109 @@ export const About: React.FC = () => {
                 />
               </div>
 
-              <div className="mt-3 px-2 flex items-center justify-between">
+              <div className="mt-4 px-2 flex items-center justify-between">
                 <div>
                   <h3 className="font-bold text-slate-900 dark:text-white text-base">
                     {personalProfile.fullName}
                   </h3>
-                  <p className="text-xs text-red-500 font-medium">
+                  <p className="text-xs text-blue-600 dark:text-cyan-400 font-medium">
                     CSE Student • Batch {personalProfile.batch}
                   </p>
                 </div>
-                <span className="px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 text-[11px] font-bold border border-emerald-200 dark:border-emerald-800">
+                <span className="px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-cyan-300 text-[11px] font-mono font-bold border border-blue-200 dark:border-blue-900/60">
                   ID: {personalProfile.studentId}
                 </span>
               </div>
             </div>
 
-            {/* Vertical Student Metadata Timeline (from reference design) */}
-            <div className="w-full max-w-sm pl-4 relative border-l-2 border-red-500 space-y-4 py-2">
-              
-              {/* Item: Name */}
-              <div className="relative pl-6">
-                <div className="absolute -left-[23px] top-1.5 h-3.5 w-3.5 rounded-full bg-red-500 border-2 border-white dark:border-black shadow-sm" />
-                <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300">
-                  <span className="font-bold text-slate-900 dark:text-orange-400">Name:</span>
-                  <span className="ml-2 font-medium">{personalProfile.fullName}</span>
-                </p>
+            {/* Quick Facts Card */}
+            <div className="w-full max-w-sm p-5 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-3">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-blue-500" />
+                Quick Academic Identity
+              </h4>
+              <div className="space-y-2 text-xs sm:text-sm">
+                <div className="flex items-center justify-between">
+                  <span className="text-slate-500 dark:text-slate-400">University:</span>
+                  <span className="font-semibold text-slate-800 dark:text-slate-200 text-right">Green Univ of Bangladesh</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-slate-500 dark:text-slate-400">Department:</span>
+                  <span className="font-semibold text-slate-800 dark:text-slate-200">CSE (Batch 251)</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-slate-500 dark:text-slate-400">Core Focus:</span>
+                  <span className="font-mono font-bold text-blue-600 dark:text-cyan-400">C++17 & Android</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-slate-500 dark:text-slate-400">Location:</span>
+                  <span className="font-semibold text-slate-800 dark:text-slate-200">Dhaka, Bangladesh</span>
+                </div>
               </div>
 
-              {/* Item: University */}
-              <div className="relative pl-6">
-                <div className="absolute -left-[23px] top-1.5 h-3.5 w-3.5 rounded-full bg-red-500 border-2 border-white dark:border-black shadow-sm" />
-                <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300">
-                  <span className="font-bold text-slate-900 dark:text-orange-400">University:</span>
-                  <span className="ml-2 font-medium">{personalProfile.university}</span>
-                </p>
+              {/* Download Resume Link */}
+              <div className="pt-2">
+                <button
+                  onClick={downloadResumePDF}
+                  type="button"
+                  className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-sm transition-all cursor-pointer active:scale-95"
+                >
+                  <FileDown className="w-3.5 h-3.5" />
+                  <span>Download Verified Resume PDF</span>
+                </button>
               </div>
-
-              {/* Item: Department */}
-              <div className="relative pl-6">
-                <div className="absolute -left-[23px] top-1.5 h-3.5 w-3.5 rounded-full bg-red-500 border-2 border-white dark:border-black shadow-sm" />
-                <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300">
-                  <span className="font-bold text-slate-900 dark:text-orange-400">Department:</span>
-                  <span className="ml-2 font-medium">CSE (Batch {personalProfile.batch})</span>
-                </p>
-              </div>
-
-              {/* Item: Focus Language */}
-              <div className="relative pl-6">
-                <div className="absolute -left-[23px] top-1.5 h-3.5 w-3.5 rounded-full bg-red-500 border-2 border-white dark:border-black shadow-sm" />
-                <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300">
-                  <span className="font-bold text-slate-900 dark:text-orange-400">Primary Language:</span>
-                  <span className="ml-2 font-mono font-bold text-red-500">C++</span>
-                </p>
-              </div>
-
-              {/* Item: Location */}
-              <div className="relative pl-6">
-                <div className="absolute -left-[23px] top-1.5 h-3.5 w-3.5 rounded-full bg-red-500 border-2 border-white dark:border-black shadow-sm" />
-                <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300">
-                  <span className="font-bold text-slate-900 dark:text-orange-400">Location:</span>
-                  <span className="ml-2 font-medium">{personalProfile.location}</span>
-                </p>
-              </div>
-
-            </div>
-
-            {/* Glowing Conic Resume Download Button */}
-            <div className="w-full max-w-sm pt-2">
-              <button
-                onClick={downloadResumePDF}
-                type="button"
-                className="w-full relative inline-flex items-center justify-center p-[2px] rounded-full overflow-hidden group cursor-pointer shadow-lg shadow-red-500/20 active:scale-95 transition-all"
-              >
-                <span className="absolute inset-0 rounded-full bg-[conic-gradient(from_180deg,#ea580c,#fdba74,#f97316,#ea580c)] animate-spin-slow opacity-90 group-hover:opacity-100 blur-[0.4px]" />
-                <span className="relative z-10 flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-red-600 to-red-500 text-white font-bold text-sm tracking-wide transition-all group-hover:from-red-500 group-hover:to-red-600 w-full shadow-md">
-                  <FileDown className="w-4 h-4" />
-                  <span>Download Full Resume</span>
-                </span>
-              </button>
             </div>
 
           </div>
 
-          {/* Right Column: Developing Journey & Vision */}
-          <div className="w-full lg:w-7/12 flex flex-col space-y-6">
+          {/* Right Column: Narrative & Highlights */}
+          <div className="lg:col-span-7 flex flex-col space-y-6">
             
-            {/* Section Heading with Red Accent */}
+            {/* Header */}
             <div>
-              <span className="text-xs sm:text-sm font-bold uppercase tracking-widest text-slate-500 dark:text-orange-500 flex items-center gap-1.5">
-                <BookOpen className="w-4 h-4 text-red-500" />
-                Background & Aspirations
+              <span className="text-blue-600 dark:text-cyan-400 font-bold uppercase tracking-widest text-xs flex items-center gap-1.5">
+                <BookOpen className="w-3.5 h-3.5" />
+                Engineering Background
               </span>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mt-1.5">
-                About Me— <span className="text-red-500">Developing Journey</span>
+              <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-1.5 tracking-tight">
+                About Me & <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300">Technical Journey</span>
               </h2>
-              <div className="w-20 h-1 bg-red-500 rounded-full mt-3 mb-6" />
             </div>
 
-            {/* Journey Paragraphs */}
+            {/* Paragraphs */}
             <div className="space-y-4 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed text-justify">
               <p>
-                I am an undergraduate student in the <strong className="text-slate-900 dark:text-white font-semibold">Department of Computer Science & Engineering</strong> at <strong className="text-slate-900 dark:text-white font-semibold">Green University of Bangladesh</strong> (Batch 251, Student ID: 251002084). My university journey has cultivated a strong foundation in computational principles, data structures, and computer architecture.
+                I am an undergraduate student in the <strong className="text-slate-900 dark:text-white font-semibold">Department of Computer Science & Engineering</strong> at <strong className="text-slate-900 dark:text-white font-semibold">Green University of Bangladesh</strong> (Batch 251, Student ID: 251002084). My academic coursework has provided me with a rigorous foundation in computational theory, data structures, algorithms, and system design.
               </p>
               
               <p>
-                My primary programming language is <strong className="text-red-500 font-semibold font-mono">C++</strong>, which I utilize daily for competitive programming and algorithmic problem solving across Codeforces, CodeChef, and LeetCode. I believe mastering asymptotic complexity and low-level data structures makes for a significantly more effective and thoughtful software engineer.
+                My core programming language is <strong className="text-blue-600 dark:text-cyan-400 font-bold font-mono">C++</strong>, which I utilize daily for competitive programming across Codeforces, CodeChef, and LeetCode. I place heavy emphasis on time-and-space complexity analysis, memory boundaries, and standard library STL algorithms to write high-performance solutions.
               </p>
 
               <p>
-                Beyond algorithmic theory, I enjoy building tangible applications that solve real-world problems. I engineered <strong className="text-slate-900 dark:text-white font-semibold">Smart Life Manager</strong>, an offline-first Android productivity companion powered by Kotlin, Jetpack Compose, and Room SQLite, as well as a custom <strong className="text-slate-900 dark:text-white font-semibold">Huffman File Compressor</strong> that performs bit-packing binary compression from scratch.
+                In practical software development, I build native Android applications utilizing <strong className="text-slate-900 dark:text-white font-semibold">Kotlin, Jetpack Compose, and Room SQLite</strong>, following Clean Architecture and MVVM patterns. I also build systems utilities, such as a custom <strong className="text-slate-900 dark:text-white font-semibold">Huffman File Compressor</strong> that handles streaming binary compression from scratch.
               </p>
 
               <p>
-                Currently, I am expanding my knowledge in <strong className="text-slate-900 dark:text-white font-semibold">Artificial Intelligence and Machine Learning</strong> while looking forward to software engineering internship opportunities where I can collaborate with senior engineers and deliver robust, scalable software.
+                Currently, I am expanding my knowledge in <strong className="text-slate-900 dark:text-white font-semibold">Artificial Intelligence and Machine Learning</strong> while seeking software engineering internships where I can contribute to production-quality codebases alongside experienced engineers.
               </p>
             </div>
 
-            {/* 3 Metric Highlight Cards */}
+            {/* 3 Metric Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
               
-              <div className="p-4 rounded-2xl bg-white dark:bg-zinc-950 border border-slate-100 dark:border-zinc-800 shadow-sm flex flex-col justify-between hover:border-red-500/50 transition-colors">
-                <div className="p-2 rounded-xl bg-red-50 dark:bg-red-950/40 text-red-500 w-fit mb-2">
+              <div className="p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 shadow-xs flex flex-col justify-between hover:border-blue-500/40 transition-colors">
+                <div className="p-2 rounded-xl bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-cyan-400 w-fit mb-2">
                   <Trophy className="w-5 h-5" />
                 </div>
                 <div>
                   <h4 className="text-xl font-bold text-slate-900 dark:text-white">74+ Solved</h4>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Codeforces & CodeChef Problem Solving</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Codeforces & CodeChef Contests</p>
                 </div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-white dark:bg-zinc-950 border border-slate-100 dark:border-zinc-800 shadow-sm flex flex-col justify-between hover:border-red-500/50 transition-colors">
-                <div className="p-2 rounded-xl bg-orange-50 dark:bg-orange-950/40 text-orange-500 w-fit mb-2">
+              <div className="p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 shadow-xs flex flex-col justify-between hover:border-violet-500/40 transition-colors">
+                <div className="p-2 rounded-xl bg-violet-50 dark:bg-violet-950/50 text-violet-600 dark:text-violet-400 w-fit mb-2">
                   <GraduationCap className="w-5 h-5" />
                 </div>
                 <div>
@@ -173,13 +145,13 @@ export const About: React.FC = () => {
                 </div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-white dark:bg-zinc-950 border border-slate-100 dark:border-zinc-800 shadow-sm flex flex-col justify-between hover:border-red-500/50 transition-colors">
-                <div className="p-2 rounded-xl bg-purple-50 dark:bg-purple-950/40 text-purple-500 w-fit mb-2">
+              <div className="p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 shadow-xs flex flex-col justify-between hover:border-cyan-500/40 transition-colors">
+                <div className="p-2 rounded-xl bg-cyan-50 dark:bg-cyan-950/50 text-cyan-600 dark:text-cyan-400 w-fit mb-2">
                   <Code2 className="w-5 h-5" />
                 </div>
                 <div>
                   <h4 className="text-xl font-bold text-slate-900 dark:text-white">C++ & Android</h4>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Core Software Engineering Focus</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Primary Engineering Specialties</p>
                 </div>
               </div>
 

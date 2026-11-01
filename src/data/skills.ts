@@ -2,71 +2,77 @@ import type { SkillCategory } from '../types';
 
 export const skillsData: SkillCategory[] = [
   {
-    id: 'languages',
+    id: 'programming-languages',
     title: 'Programming Languages',
-    description: 'Languages actively used for algorithmic problem solving, native mobile engineering, and system utilities.',
+    description: 'Core languages actively used for algorithmic problem solving, native mobile engineering, and system utilities.',
     skills: [
       { name: 'C++', level: 'proficient', highlight: true },
       { name: 'C', level: 'proficient' },
       { name: 'Kotlin', level: 'working-knowledge', highlight: true },
-      { name: 'Python', level: 'working-knowledge' }
+      { name: 'Python', level: 'working-knowledge' },
+      { name: 'TypeScript', level: 'working-knowledge' },
+      { name: 'JavaScript', level: 'working-knowledge' }
     ]
   },
   {
-    id: 'fundamentals',
-    title: 'Computer Science Fundamentals',
-    description: 'Foundational concepts applied in competitive problem solving and academic projects.',
+    id: 'frontend-development',
+    title: 'Frontend Development',
+    description: 'Modern declarative user interfaces and responsive web and mobile application engineering.',
     skills: [
-      { name: 'Data Structures & Algorithms', level: 'proficient', highlight: true },
-      { name: 'Object-Oriented Programming (OOP)', level: 'proficient', highlight: true },
-      { name: 'Complexity Analysis (Big-O)', level: 'proficient' },
-      { name: 'Computer Architecture & Systems', level: 'working-knowledge' },
-      { name: 'Lossless Data Compression Algorithms', level: 'working-knowledge' },
-      { name: 'Discrete Mathematics', level: 'working-knowledge' }
+      { name: 'React.js', level: 'working-knowledge', highlight: true },
+      { name: 'Jetpack Compose', level: 'working-knowledge', highlight: true },
+      { name: 'Tailwind CSS', level: 'proficient', highlight: true },
+      { name: 'HTML5 & Semantic Web', level: 'proficient' },
+      { name: 'CSS3 & Flexbox/Grid', level: 'proficient' },
+      { name: 'Material 3 Design', level: 'working-knowledge' }
     ]
   },
   {
-    id: 'mobile-dev',
-    title: 'Mobile & Software Development',
-    description: 'Modern native Android architecture, declarative UI design, and desktop application tools.',
+    id: 'backend-development',
+    title: 'Backend Development',
+    description: 'Lightweight service proxies, background worker tasks, and application integration architecture.',
     skills: [
-      { name: 'Android Native Development', level: 'working-knowledge', highlight: true },
-      { name: 'Jetpack Compose & Material 3', level: 'working-knowledge', highlight: true },
-      { name: 'Offline-First Architecture', level: 'working-knowledge' },
-      { name: 'Desktop GUI (CustomTkinter)', level: 'working-knowledge' }
+      { name: 'Node.js', level: 'working-knowledge', highlight: true },
+      { name: 'Express Proxy APIs', level: 'working-knowledge' },
+      { name: 'RESTful API Integration', level: 'working-knowledge', highlight: true },
+      { name: 'Android WorkManager', level: 'working-knowledge' }
     ]
   },
   {
-    id: 'databases',
-    title: 'Databases & Cloud Persistence',
-    description: 'Local caching and cloud document storage utilized in verified software projects.',
+    id: 'database',
+    title: 'Database',
+    description: 'Local relational persistence and cloud document caching utilized in verified software projects.',
     skills: [
-      { name: 'Room Database (Android SQLite)', level: 'working-knowledge', highlight: true },
+      { name: 'Room Database (SQLite)', level: 'working-knowledge', highlight: true },
       { name: 'Firebase Firestore & Auth', level: 'working-knowledge' },
-      { name: 'SQL Fundamentals', level: 'working-knowledge' }
+      { name: 'SQL Query Fundamentals', level: 'working-knowledge' }
     ]
   },
   {
-    id: 'tools',
-    title: 'Developer Tools & Platforms',
-    description: 'Version control and engineering tools used across daily development workflows.',
+    id: 'tools-platforms',
+    title: 'Tools & Platforms',
+    description: 'Developer environments, version control systems, and build automation platforms.',
     skills: [
       { name: 'Git & GitHub', level: 'proficient', highlight: true },
       { name: 'Android Studio', level: 'working-knowledge', highlight: true },
       { name: 'VS Code', level: 'proficient' },
-      { name: 'Gradle & Build Systems', level: 'working-knowledge' },
-      { name: 'Command Line / Terminal', level: 'proficient' }
+      { name: 'Linux / Terminal', level: 'proficient' },
+      { name: 'Gradle Build System', level: 'working-knowledge' },
+      { name: 'Vite & npm', level: 'proficient' }
     ]
   },
   {
-    id: 'currently-learning',
-    title: 'Areas of Interest & Currently Learning',
-    description: 'Active fields of exploration and upcoming competencies.',
+    id: 'cs-fundamentals',
+    title: 'Computer Science Fundamentals',
+    description: 'Core computational principles and algorithmic theory applied in university coursework and contest problem solving.',
     skills: [
-      { name: 'Artificial Intelligence & Machine Learning', level: 'currently-learning', highlight: true },
-      { name: 'Advanced Dynamic Programming & Graphs', level: 'currently-learning', highlight: true },
-      { name: 'Cloud & API Microservices', level: 'currently-learning' },
-      { name: 'System Design Fundamentals', level: 'currently-learning' }
+      { name: 'Data Structures & Algorithms', level: 'proficient', highlight: true },
+      { name: 'Object-Oriented Programming (OOP)', level: 'proficient', highlight: true },
+      { name: 'Complexity Analysis (Big-O)', level: 'proficient' },
+      { name: 'Greedy & Dynamic Programming', level: 'working-knowledge' },
+      { name: 'Binary Trees & Min-Heaps', level: 'working-knowledge', highlight: true },
+      { name: 'Lossless Huffman Compression', level: 'working-knowledge' },
+      { name: 'Discrete Mathematics', level: 'working-knowledge' }
     ]
   }
 ];
