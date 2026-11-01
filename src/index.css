@@ -10,16 +10,16 @@
     scroll-behavior: smooth;
   }
 
-  /* Accessible focus indicators for interactive elements */
+  /* Accessible focus indicators for keyboard and screen reader navigation */
   a:focus-visible,
   button:focus-visible,
   input:focus-visible,
   textarea:focus-visible {
-    outline: 2px solid #06b6d4;
+    outline: 2px solid #ef4444;
     outline-offset: 2px;
   }
 
-  /* Custom scrollbar */
+  /* Custom sleek scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
   }
@@ -27,11 +27,61 @@
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: rgba(156, 163, 175, 0.4);
+    background: rgba(239, 68, 68, 0.25);
     border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(156, 163, 175, 0.7);
+    background: rgba(239, 68, 68, 0.55);
+  }
+}
+
+/* Infinite Marquee Animation for Technology Skills */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 25s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Conic gradient rotation for hero & about resume buttons */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 4s linear infinite;
+}
+
+/* Accessible Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+    overflow-x: auto;
+    width: 100%;
+  }
+  .animate-spin-slow {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
   }
 }
 

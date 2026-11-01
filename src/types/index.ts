@@ -55,7 +55,7 @@ export interface Project {
   subtitle: string;
   tagline: string;
   description: string;
-  category: 'Android & Mobile' | 'Algorithms & Systems' | 'Academic & Practice';
+  category: 'Android & Mobile' | 'Algorithms & Systems' | 'Academic & Practice' | 'Web Applications';
   techStack: string[];
   githubUrl: string;
   liveDemoUrl?: string;

@@ -1,122 +1,205 @@
 import React from 'react';
-import { ArrowDown, FileDown, Sparkles, Code2, MapPin } from 'lucide-react';
-import { GithubIcon, LinkedinIcon } from '../components/Icons';
+import { ArrowDown, FileDown, Code2, Sparkles, MapPin } from 'lucide-react';
+import { GithubIcon, LinkedinIcon, CodeforcesIcon, CodeChefIcon, LeetCodeIcon } from '../components/Icons';
 import { personalProfile } from '../data/profile';
-import { TerminalCard } from '../components/TerminalCard';
 import { downloadResumePDF } from '../utils/pdfGenerator';
+import heroImg from '../assets/hero.png';
 
 export const Hero: React.FC = () => {
   return (
-    <section id="home" className="relative pt-24 sm:pt-28 pb-14 sm:pb-16 md:pt-36 md:pb-24 overflow-hidden">
-      {/* Background Glow Accents */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-tr from-cyan-500/10 via-blue-500/10 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
-
+    <section id="home" className="relative pt-28 sm:pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
-          {/* Left Column: Introductions & CTAs */}
-          <div className="lg:col-span-7 flex flex-col items-start text-left">
-            {/* Status Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/25 mb-5 sm:mb-6">
-              <span className="w-2 h-2 rounded-full bg-cyan-500 animate-ping" />
-              <span>Green University of Bangladesh • CSE Batch {personalProfile.batch}</span>
+          
+          {/* Left Column: Greeting, Name, Role & Connect */}
+          <div className="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left space-y-4 sm:space-y-5">
+            {/* Availability / Status Badge */}
+            <div className="border border-red-500 w-fit rounded-full px-4 py-1.5 flex items-center justify-center gap-2 bg-red-50/60 dark:bg-red-950/20 shadow-sm">
+              <span className="h-2 w-2 bg-red-500 rounded-full animate-ping" />
+              <p className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-red-400">
+                Open to opportunities • CSE Batch {personalProfile.batch}
+              </p>
             </div>
 
-            {/* Name */}
-            <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15]">
-              Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600">{personalProfile.fullName}</span>
-            </h1>
+            {/* Greeting & Name */}
+            <div>
+              <h3 className="text-lg sm:text-xl font-medium text-slate-600 dark:text-slate-300 flex items-center justify-center lg:justify-start gap-1.5">
+                Hey, I'm <span className="text-2xl sm:text-3xl inline-block origin-bottom-right animate-bounce">👋</span>
+              </h3>
+              <h1 className="text-3xl sm:text-5xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-slate-900 from-30% via-red-500 to-red-500 dark:from-white dark:from-30% dark:via-red-400 dark:to-red-400 pb-1 mt-1">
+                {personalProfile.fullName}
+              </h1>
+            </div>
 
             {/* Professional Headline */}
-            <h2 className="mt-3 sm:mt-4 text-lg sm:text-2xl font-semibold text-slate-700 dark:text-slate-300">
-              Computer Science & Engineering Student |{' '}
-              <span className="text-cyan-600 dark:text-cyan-400 font-bold">Aspiring Software Engineer</span>
-            </h2>
-
-            {/* Location & Focus */}
-            <div className="mt-3 flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-              <span className="flex items-center gap-1">
-                <MapPin className="w-4 h-4 text-cyan-500 shrink-0" />
-                {personalProfile.location}
-              </span>
-              <span className="hidden sm:inline">•</span>
-              <span className="flex items-center gap-1">
-                <Code2 className="w-4 h-4 text-cyan-500 shrink-0" />
-                Primary Language: C++
-              </span>
-              <span className="hidden sm:inline">•</span>
-              <span className="flex items-center gap-1">
-                <Sparkles className="w-4 h-4 text-cyan-500 shrink-0" />
-                Problem Solving & Android Development
+            <div className="text-base sm:text-xl font-semibold text-slate-800 dark:text-slate-200">
+              <span>I am a </span>
+              <span className="text-red-500 font-bold">
+                CSE Student | Aspiring Software Engineer
               </span>
             </div>
 
-            {/* Supporting Description */}
-            <p className="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
-              I am an undergraduate CSE student dedicated to strengthening my foundations in algorithmic problem solving, software architecture, and modern application engineering. Experienced in building native Android apps with Kotlin and algorithmic tools from scratch.
-            </p>
+            {/* University & Location Badges */}
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+              <span className="flex items-center gap-1">
+                <MapPin className="w-3.5 h-3.5 text-red-500" />
+                {personalProfile.location}
+              </span>
+              <span>•</span>
+              <span>Green University of Bangladesh</span>
+            </div>
+
+            {/* Connect Icons Row */}
+            <div className="pt-2 flex flex-col sm:flex-row items-center gap-3">
+              <span className="text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400">
+                Connect :
+              </span>
+              <div className="flex items-center gap-2.5">
+                {/* GitHub */}
+                <a
+                  href={personalProfile.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black flex items-center justify-center transition-all duration-300 shadow-sm hover:scale-105"
+                  title="GitHub Profile (@Sihab75)"
+                  aria-label="GitHub Profile"
+                >
+                  <GithubIcon className="w-4 h-4" />
+                </a>
+
+                {/* LinkedIn */}
+                <a
+                  href={personalProfile.linkedInUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 hover:bg-[#0077B5] hover:text-white flex items-center justify-center transition-all duration-300 shadow-sm hover:scale-105"
+                  title="LinkedIn Profile"
+                  aria-label="LinkedIn Profile"
+                >
+                  <LinkedinIcon className="w-4 h-4" />
+                </a>
+
+                {/* Codeforces */}
+                <a
+                  href={personalProfile.codeforcesUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 hover:bg-red-600 hover:text-white flex items-center justify-center transition-all duration-300 shadow-sm hover:scale-105"
+                  title="Codeforces Profile (Rating 693)"
+                  aria-label="Codeforces Profile"
+                >
+                  <CodeforcesIcon className="w-4 h-4" />
+                </a>
+
+                {/* CodeChef */}
+                <a
+                  href={personalProfile.codechefUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 hover:bg-[#5B4638] hover:text-white flex items-center justify-center transition-all duration-300 shadow-sm hover:scale-105"
+                  title="CodeChef Profile (Rating 1417)"
+                  aria-label="CodeChef Profile"
+                >
+                  <CodeChefIcon className="w-4 h-4" />
+                </a>
+
+                {/* LeetCode */}
+                <a
+                  href={personalProfile.leetcodeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 hover:bg-[#FFA116] hover:text-white flex items-center justify-center transition-all duration-300 shadow-sm hover:scale-105"
+                  title="LeetCode Profile"
+                  aria-label="LeetCode Profile"
+                >
+                  <LeetCodeIcon className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Middle Column: Stylized Developer Portrait / Visual Card */}
+          <div className="lg:col-span-4 flex justify-center">
+            <div className="relative group">
+              {/* Soft Ambient Radial Behind Image */}
+              <div className="absolute -inset-2 bg-gradient-to-r from-red-500/20 via-orange-500/20 to-pink-500/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition duration-500 pointer-events-none" />
+              
+              {/* Card Container */}
+              <div className="relative rounded-[2rem] p-2 bg-gradient-to-br from-white/90 via-slate-50 to-white/70 dark:from-zinc-900 dark:via-zinc-950 dark:to-black border border-red-100 dark:border-zinc-800 shadow-2xl">
+                <div className="relative overflow-hidden rounded-[1.75rem] bg-slate-100 dark:bg-zinc-900 w-64 h-64 sm:w-72 sm:h-72 flex items-center justify-center">
+                  <img
+                    src={heroImg}
+                    alt="Md. Korimul Jaman"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    onError={(e) => {
+                      // Fallback to GitHub avatar if local asset has display issue
+                      (e.target as HTMLImageElement).src = personalProfile.avatarUrl;
+                    }}
+                  />
+                  
+                  {/* Bottom Overlay Badge */}
+                  <div className="absolute bottom-3 left-3 right-3 px-3 py-1.5 rounded-xl bg-black/60 backdrop-blur-md text-white text-[11px] font-mono flex items-center justify-between border border-white/10">
+                    <span className="flex items-center gap-1.5">
+                      <Code2 className="w-3.5 h-3.5 text-red-400" />
+                      C++ • Android • Python
+                    </span>
+                    <span className="text-emerald-400 font-semibold">Active</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Floating Pill: C++ & STL */}
+              <div className="absolute -top-3 -right-3 hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-white dark:bg-zinc-900 text-xs font-bold text-red-500 shadow-lg border border-red-100 dark:border-zinc-800">
+                <Sparkles className="w-3 h-3 text-red-500" />
+                <span>C++17 & STL</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Supporting Description & Action Buttons */}
+          <div className="lg:col-span-3 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-orange-500 mb-1">
+                Engineering Philosophy
+              </p>
+              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+                I'm passionate about software development, problem solving, and exploring AI and machine learning. I enjoy building useful projects and continuously improving my programming skills.
+              </p>
+            </div>
 
             {/* Action Buttons */}
-            <div className="mt-6 sm:mt-8 grid grid-cols-1 sm:flex sm:flex-wrap items-center gap-3 w-full sm:w-auto">
-              {/* View Projects */}
+            <div className="flex flex-col sm:flex-row lg:flex-col gap-3 w-full sm:w-auto">
+              {/* Primary: Explore My Projects */}
               <a
                 href="#projects"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-xs sm:text-sm text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 shadow-md hover:shadow-lg transition-all"
+                className="group relative cursor-pointer flex items-center justify-center gap-2 px-6 py-3 bg-red-500 hover:bg-red-600 text-white font-bold text-sm rounded-full shadow-lg shadow-red-500/25 transition-all duration-300 hover:scale-[1.02] active:scale-95"
               >
-                <span>View My Projects</span>
-                <ArrowDown className="w-4 h-4" />
+                <span>Explore My Projects</span>
+                <ArrowDown className="w-4 h-4 transition-transform group-hover:translate-y-0.5" />
               </a>
 
-              {/* Download Resume */}
+              {/* Secondary: Download Resume (Glowing Conic Border Button) */}
               <button
                 onClick={downloadResumePDF}
                 type="button"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-xs sm:text-sm text-slate-800 dark:text-white bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-700 transition-all cursor-pointer"
+                className="relative inline-flex items-center justify-center p-[2px] rounded-full overflow-hidden group cursor-pointer shadow-md active:scale-95 transition-all"
+                title="Download ATS-Friendly PDF Resume"
               >
-                <FileDown className="w-4 h-4 text-cyan-500" />
-                <span>Download Resume</span>
+                <span className="absolute inset-0 rounded-full bg-[conic-gradient(from_180deg,#ea580c,#fdba74,#f97316,#ea580c)] animate-spin-slow opacity-90 group-hover:opacity-100 blur-[0.4px]" />
+                <span className="relative z-10 flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-white dark:bg-zinc-950 text-slate-900 dark:text-white font-bold text-sm tracking-wide transition-all group-hover:bg-slate-50 dark:group-hover:bg-zinc-900 w-full">
+                  <FileDown className="w-4 h-4 text-red-500" />
+                  <span>Download Resume</span>
+                </span>
               </button>
-
-              {/* GitHub Button */}
-              <a
-                href={personalProfile.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl font-medium text-xs sm:text-sm text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-600 transition-colors"
-                title="Visit GitHub Profile"
-              >
-                <GithubIcon className="w-4 h-4" />
-                <span>GitHub</span>
-              </a>
-
-              {/* LinkedIn Button */}
-              <a
-                href={personalProfile.linkedInUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl font-medium text-xs sm:text-sm text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/60 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors"
-                title="Visit LinkedIn Profile"
-              >
-                <LinkedinIcon className="w-4 h-4" />
-                <span>LinkedIn</span>
-              </a>
             </div>
 
-            {/* Quick Skills Pills */}
-            <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-slate-200 dark:border-slate-800/80 w-full flex flex-wrap items-center gap-2 text-xs">
-              <span className="text-slate-400 font-mono text-[11px] mr-1">Core Competencies:</span>
-              <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800/80 font-mono text-cyan-600 dark:text-cyan-400 font-semibold">C++17</span>
-              <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800/80 font-mono text-slate-700 dark:text-slate-300">Data Structures & STL</span>
-              <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800/80 font-mono text-purple-600 dark:text-purple-400">Kotlin</span>
-              <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800/80 font-mono text-slate-700 dark:text-slate-300">Jetpack Compose</span>
-              <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800/80 font-mono text-slate-700 dark:text-slate-300">Room DB</span>
-              <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800/80 font-mono text-emerald-600 dark:text-emerald-400">Codeforces (74+ solved)</span>
+            {/* Core Competencies Quick Indicator */}
+            <div className="pt-2 text-[11px] text-slate-500 dark:text-slate-400 font-mono">
+              <span>Goal: </span>
+              <span className="text-slate-800 dark:text-slate-200 font-semibold">Software Engineering Internship / Full-Time</span>
             </div>
           </div>
 
-          {/* Right Column: Interactive Terminal Preview */}
-          <div className="lg:col-span-5 flex justify-center w-full">
-            <TerminalCard />
-          </div>
         </div>
       </div>
     </section>
