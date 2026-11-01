@@ -16,11 +16,19 @@ export const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
+      {/* Skip to Main Content Link for Keyboard and Screen Readers */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-cyan-500 focus:text-white focus:rounded-lg focus:shadow-lg focus:outline-none font-semibold text-xs uppercase tracking-wider"
+      >
+        Skip to main content
+      </a>
+
       {/* Sticky Top Navigation */}
       <Navbar theme={theme} toggleTheme={toggleTheme} />
 
       {/* Main Content Sections */}
-      <main>
+      <main id="main-content">
         <Hero />
         <About />
         <Skills />

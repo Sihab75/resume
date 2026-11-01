@@ -23,9 +23,9 @@ export const ResumeView: React.FC = () => {
   return (
     <div className="w-full max-w-4xl mx-auto">
       {/* Action Toolbar */}
-      <div className="mb-6 flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm no-print">
-        <div className="flex items-center gap-2">
-          <span className="p-2 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
+      <div className="mb-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm no-print">
+        <div className="flex items-center gap-2.5">
+          <span className="p-2 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 shrink-0">
             <ShieldCheck className="w-5 h-5" />
           </span>
           <div>
@@ -42,7 +42,7 @@ export const ResumeView: React.FC = () => {
           <button
             onClick={handlePrint}
             type="button"
-            className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer"
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer"
           >
             <Printer className="w-4 h-4" />
             <span>Print Resume</span>
@@ -51,7 +51,7 @@ export const ResumeView: React.FC = () => {
           <button
             onClick={downloadResumePDF}
             type="button"
-            className="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 rounded-xl shadow-md transition-all cursor-pointer"
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 rounded-xl shadow-md transition-all cursor-pointer"
           >
             <FileDown className="w-4 h-4" />
             <span>Download PDF</span>
@@ -60,13 +60,13 @@ export const ResumeView: React.FC = () => {
       </div>
 
       {/* The Printable ATS Paper Card */}
-      <div className="relative bg-white text-slate-900 rounded-2xl shadow-xl border border-slate-200 p-8 sm:p-12 font-sans selection:bg-slate-200 selection:text-black">
+      <div className="relative bg-white text-slate-900 rounded-2xl shadow-xl border border-slate-200 p-5 sm:p-8 md:p-12 font-sans selection:bg-slate-200 selection:text-black">
         {/* Header */}
         <div className="border-b border-slate-300 pb-5 mb-6">
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-950">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-slate-950">
             {personalProfile.fullName}
           </h1>
-          <p className="text-base font-semibold text-slate-700 mt-1">
+          <p className="text-sm sm:text-base font-semibold text-slate-700 mt-1">
             {personalProfile.profession} • Aspiring Software Engineer
           </p>
 
@@ -123,10 +123,10 @@ export const ResumeView: React.FC = () => {
             {educationData.map((edu, idx) => (
               <div key={idx}>
                 <div className="flex flex-wrap items-baseline justify-between gap-1">
-                  <h3 className="text-sm font-bold text-slate-900">
+                  <h3 className="text-xs sm:text-sm font-bold text-slate-900">
                     {edu.institution}
                   </h3>
-                  <span className="text-xs text-slate-600 font-medium">{edu.period}</span>
+                  <span className="text-[11px] sm:text-xs text-slate-600 font-medium">{edu.period}</span>
                 </div>
                 <div className="text-xs font-semibold text-slate-800 italic">
                   {edu.degree}
@@ -148,8 +148,8 @@ export const ResumeView: React.FC = () => {
           </h2>
           <div className="space-y-1.5 text-xs text-slate-700">
             {skillsData.slice(0, 5).map((cat) => (
-              <div key={cat.id} className="flex flex-wrap">
-                <span className="font-bold text-slate-900 w-44 shrink-0">
+              <div key={cat.id} className="flex flex-col sm:flex-row">
+                <span className="font-bold text-slate-900 sm:w-44 shrink-0">
                   {cat.title}:
                 </span>
                 <span className="flex-1 text-slate-800">
@@ -169,7 +169,7 @@ export const ResumeView: React.FC = () => {
             {projectsData.map((proj) => (
               <div key={proj.id}>
                 <div className="flex flex-wrap items-baseline justify-between gap-1">
-                  <h3 className="text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                  <h3 className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
                     {proj.title}
                     <span className="text-xs font-normal text-slate-500">
                       ({proj.subtitle})

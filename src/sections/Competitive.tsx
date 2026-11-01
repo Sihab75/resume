@@ -18,16 +18,16 @@ export const Competitive: React.FC = () => {
         />
 
         {/* Live Codeforces Highlight Card */}
-        <div className="mb-10 p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-950 text-white border border-slate-800 shadow-xl relative overflow-hidden">
+        <div className="mb-10 p-5 sm:p-8 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-950 text-white border border-slate-800 shadow-xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-80 h-80 bg-red-500/10 rounded-full blur-3xl pointer-events-none" />
 
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative z-10">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 relative z-10">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-red-500/20 border border-red-500/30 flex items-center justify-center text-red-400 shrink-0">
-                <Trophy className="w-7 h-7" />
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-red-500/20 border border-red-500/30 flex items-center justify-center text-red-400 shrink-0">
+                <Trophy className="w-6 h-6 sm:w-7 sm:h-7" />
               </div>
               <div>
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-2">
                   <span className="text-xs font-mono font-bold uppercase tracking-wider text-red-400">
                     Live Verified Contest Profile
                   </span>
@@ -36,7 +36,7 @@ export const Competitive: React.FC = () => {
                     Codeforces API Connected
                   </span>
                 </div>
-                <h3 className="text-2xl font-black text-white mt-1">
+                <h3 className="text-xl sm:text-2xl font-black text-white mt-1">
                   Codeforces: {personalProfile.codeforcesHandle}
                 </h3>
                 <p className="text-xs text-slate-400 mt-0.5">
@@ -46,31 +46,28 @@ export const Competitive: React.FC = () => {
             </div>
 
             {/* Stats Metrics Grid */}
-            <div className="flex flex-wrap items-center gap-4 sm:gap-6 bg-slate-800/60 p-4 rounded-xl border border-slate-700/60">
-              <div className="text-center px-2">
-                <span className="block text-xs text-slate-400">Current Rating</span>
-                <span className="text-xl sm:text-2xl font-mono font-bold text-red-400">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 bg-slate-800/60 p-3 sm:p-4 rounded-xl border border-slate-700/60 w-full lg:w-auto">
+              <div className="text-center px-2 py-1 bg-slate-900/40 rounded-lg sm:bg-transparent">
+                <span className="block text-[11px] text-slate-400">Current Rating</span>
+                <span className="text-lg sm:text-2xl font-mono font-bold text-red-400">
                   {cfStats.rating}
                 </span>
               </div>
-              <div className="w-px h-8 bg-slate-700" />
-              <div className="text-center px-2">
-                <span className="block text-xs text-slate-400">Max Rating</span>
-                <span className="text-xl sm:text-2xl font-mono font-bold text-slate-200">
+              <div className="text-center px-2 py-1 bg-slate-900/40 rounded-lg sm:bg-transparent">
+                <span className="block text-[11px] text-slate-400">Max Rating</span>
+                <span className="text-lg sm:text-2xl font-mono font-bold text-slate-200">
                   {cfStats.maxRating}
                 </span>
               </div>
-              <div className="w-px h-8 bg-slate-700" />
-              <div className="text-center px-2">
-                <span className="block text-xs text-slate-400">Rank</span>
+              <div className="text-center px-2 py-1 bg-slate-900/40 rounded-lg sm:bg-transparent">
+                <span className="block text-[11px] text-slate-400">Rank</span>
                 <span className="text-sm sm:text-base font-bold capitalize text-slate-300">
                   {cfStats.rank}
                 </span>
               </div>
-              <div className="w-px h-8 bg-slate-700" />
-              <div className="text-center px-2">
-                <span className="block text-xs text-slate-400">Problems Solved</span>
-                <span className="text-xl sm:text-2xl font-mono font-bold text-emerald-400">
+              <div className="text-center px-2 py-1 bg-slate-900/40 rounded-lg sm:bg-transparent">
+                <span className="block text-[11px] text-slate-400">Solved Problems</span>
+                <span className="text-lg sm:text-2xl font-mono font-bold text-emerald-400">
                   {cfStats.solvedCount}+
                 </span>
               </div>
@@ -81,7 +78,7 @@ export const Competitive: React.FC = () => {
               href={personalProfile.codeforcesUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-red-600 hover:bg-red-700 text-white shadow-md transition-all shrink-0"
+              className="w-full lg:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-red-600 hover:bg-red-700 text-white shadow-md transition-all shrink-0"
             >
               <span>Visit Codeforces Profile</span>
               <ExternalLink className="w-4 h-4" />
@@ -94,7 +91,7 @@ export const Competitive: React.FC = () => {
           {competitiveProfilesData.map((profile) => (
             <div
               key={profile.platform}
-              className="flex flex-col justify-between p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/40 shadow-sm hover:shadow-md transition-all"
+              className="flex flex-col justify-between p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/40 shadow-sm hover:shadow-md transition-all"
             >
               <div>
                 <div className="flex items-center justify-between gap-2 mb-3">
@@ -117,7 +114,7 @@ export const Competitive: React.FC = () => {
 
                 {profile.rating && (
                   <div className="mt-2 text-xs font-semibold text-cyan-600 dark:text-cyan-400">
-                    Rating: {profile.rating} • Solved: {profile.solvedCount}
+                    Rating: {profile.rating} • {profile.badge}
                   </div>
                 )}
 
@@ -142,7 +139,7 @@ export const Competitive: React.FC = () => {
         </div>
 
         {/* Why Competitive Programming Banner */}
-        <div className="mt-10 p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200/80 dark:border-slate-800 text-xs sm:text-sm text-slate-600 dark:text-slate-300 flex flex-col sm:flex-row items-center gap-4">
+        <div className="mt-10 p-5 sm:p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200/80 dark:border-slate-800 text-xs sm:text-sm text-slate-600 dark:text-slate-300 flex flex-col sm:flex-row items-center gap-4">
           <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 shrink-0">
             <Zap className="w-6 h-6" />
           </div>

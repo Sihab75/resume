@@ -73,7 +73,7 @@ export const Contact: React.FC = () => {
           <div className="lg:col-span-5 flex flex-col gap-4">
             {/* WhatsApp Card */}
             {personalProfile.isPhonePublic && (
-              <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-emerald-500/40 transition-colors">
+              <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-emerald-500/40 transition-colors">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
                     <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
@@ -116,7 +116,7 @@ export const Contact: React.FC = () => {
             )}
 
             {/* Email Card */}
-            <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-cyan-500/40 transition-colors">
+            <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-cyan-500/40 transition-colors">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-3">
                   <div className="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
@@ -170,7 +170,7 @@ export const Contact: React.FC = () => {
                 href={personalProfile.linkedInUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-blue-500/50 flex items-center justify-between transition-colors shadow-sm"
+                className="p-3.5 sm:p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-blue-500/50 flex items-center justify-between transition-colors shadow-sm"
               >
                 <div className="flex items-center gap-2 text-xs font-semibold text-slate-800 dark:text-slate-200">
                   <LinkedinIcon className="w-4 h-4 text-blue-500" />
@@ -183,7 +183,7 @@ export const Contact: React.FC = () => {
                 href={personalProfile.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-slate-400 flex items-center justify-between transition-colors shadow-sm"
+                className="p-3.5 sm:p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-slate-400 flex items-center justify-between transition-colors shadow-sm"
               >
                 <div className="flex items-center gap-2 text-xs font-semibold text-slate-800 dark:text-slate-200">
                   <GithubIcon className="w-4 h-4 text-slate-700 dark:text-slate-300" />
@@ -194,9 +194,9 @@ export const Contact: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Mailto-Powered Contact Form */}
+          {/* Right Column: Accessible Message Form */}
           <div className="lg:col-span-7">
-            <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+            <div className="p-5 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
               <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1">
                 Send a Direct Message
               </h3>
@@ -204,13 +204,14 @@ export const Contact: React.FC = () => {
                 Fill out the fields below to prepare a message draft.
               </p>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4" noValidate={false}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                      Your Name <span className="text-rose-500">*</span>
+                    <label htmlFor="contact-name" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                      Your Name <span className="text-rose-500" aria-hidden="true">*</span>
                     </label>
                     <input
+                      id="contact-name"
                       type="text"
                       required
                       placeholder="e.g. John Doe / Recruiter Name"
@@ -221,10 +222,11 @@ export const Contact: React.FC = () => {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                    <label htmlFor="contact-email" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
                       Your Email (Optional)
                     </label>
                     <input
+                      id="contact-email"
                       type="email"
                       placeholder="name@company.com"
                       value={formData.senderEmail}
@@ -235,10 +237,11 @@ export const Contact: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                  <label htmlFor="contact-subject" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
                     Subject
                   </label>
                   <input
+                    id="contact-subject"
                     type="text"
                     placeholder="e.g. Software Engineering Internship Inquiry"
                     value={formData.subject}
@@ -248,10 +251,11 @@ export const Contact: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                    Message <span className="text-rose-500">*</span>
+                  <label htmlFor="contact-message" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                    Message <span className="text-rose-500" aria-hidden="true">*</span>
                   </label>
                   <textarea
+                    id="contact-message"
                     required
                     rows={4}
                     placeholder="Write your message, project details, or inquiry here..."
