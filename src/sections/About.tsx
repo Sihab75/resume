@@ -9,7 +9,7 @@ import {
 } from 'lucide-react';
 import { personalProfile } from '../data/profile';
 import { downloadResumePDF } from '../utils/pdfGenerator';
-import heroImg from '../assets/hero.png';
+import profileImg from '../assets/profile.jpg';
 
 export const About: React.FC = () => {
   return (
@@ -23,13 +23,14 @@ export const About: React.FC = () => {
             
             {/* Visual Portrait Card */}
             <div className="w-full max-w-sm rounded-3xl overflow-hidden bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 shadow-md p-3 relative group">
-              <div className="w-full h-64 sm:h-72 rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-950 flex items-center justify-center">
+              <div className="w-full h-64 sm:h-72 rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-950 flex items-center justify-center relative">
                 <img
-                  src={heroImg}
+                  src={profileImg}
                   alt={personalProfile.fullName}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                  className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                   onError={(e) => {
-                    (e.target as HTMLImageElement).src = personalProfile.avatarUrl;
+                    (e.target as HTMLImageElement).src = '/profile.jpg';
                   }}
                 />
               </div>
