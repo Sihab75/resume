@@ -25,7 +25,7 @@ export const Projects: React.FC = () => {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-10 md:mb-12 gap-4">
           <div>
             <span className="text-blue-600 dark:text-cyan-400 font-bold uppercase tracking-widest text-xs flex items-center gap-1.5">
-              <FolderGit2 className="w-3.5 h-3.5" />
+              <FolderGit2 className="w-3.5 h-3.5" aria-hidden="true" />
               Portfolio Showcase
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mt-1.5 tracking-tight">
@@ -42,7 +42,7 @@ export const Projects: React.FC = () => {
           >
             <GithubIcon className="w-4 h-4" />
             <span>View All on GitHub</span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-blue-500 dark:text-cyan-400" />
+            <ArrowUpRight className="w-3.5 h-3.5 text-blue-500 dark:text-cyan-400" aria-hidden="true" />
           </a>
         </div>
 

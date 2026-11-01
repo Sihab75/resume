@@ -26,7 +26,7 @@ export const ResumeView: React.FC = () => {
       <div className="mb-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 p-5 rounded-2xl bg-white/90 dark:bg-slate-950/90 border border-slate-200/80 dark:border-slate-800 shadow-sm no-print">
         <div className="flex items-center gap-3">
           <span className="p-2.5 rounded-xl bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 shrink-0">
-            <ShieldCheck className="w-5 h-5" />
+            <ShieldCheck className="w-5 h-5" aria-hidden="true" />
           </span>
           <div>
             <h4 className="text-sm font-bold text-slate-900 dark:text-white">
@@ -44,7 +44,7 @@ export const ResumeView: React.FC = () => {
             type="button"
             className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2 text-xs font-bold rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors cursor-pointer"
           >
-            <Printer className="w-3.5 h-3.5" />
+            <Printer className="w-3.5 h-3.5" aria-hidden="true" />
             <span>Print</span>
           </button>
 
@@ -53,7 +53,7 @@ export const ResumeView: React.FC = () => {
             type="button"
             className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 rounded-xl shadow-md shadow-blue-500/25 transition-all cursor-pointer active:scale-95"
           >
-            <FileDown className="w-4 h-4" />
+            <FileDown className="w-4 h-4" aria-hidden="true" />
             <span>Download PDF</span>
           </button>
         </div>
@@ -73,15 +73,15 @@ export const ResumeView: React.FC = () => {
 
           <div className="mt-3 flex flex-wrap items-center gap-y-1.5 gap-x-4 text-xs text-slate-600">
             <span className="flex items-center gap-1">
-              <MapPin className="w-3.5 h-3.5 text-blue-600" />
+              <MapPin className="w-3.5 h-3.5 text-blue-600" aria-hidden="true" />
               {personalProfile.location}
             </span>
             <span className="flex items-center gap-1">
-              <Phone className="w-3.5 h-3.5 text-slate-500" />
+              <Phone className="w-3.5 h-3.5 text-slate-500" aria-hidden="true" />
               {phoneDisplay}
             </span>
             <span className="flex items-center gap-1">
-              <Mail className="w-3.5 h-3.5 text-slate-500" />
+              <Mail className="w-3.5 h-3.5 text-slate-500" aria-hidden="true" />
               {emailDisplay}
             </span>
             <a

@@ -15,7 +15,7 @@ export const Competitive: React.FC = () => {
         {/* Section Header */}
         <div className="mb-12">
           <p className="text-xs font-bold tracking-widest uppercase text-blue-600 dark:text-cyan-400 flex items-center gap-1.5">
-            <Trophy className="w-3.5 h-3.5 text-blue-500" />
+            <Trophy className="w-3.5 h-3.5 text-blue-500" aria-hidden="true" />
             Competitive Programming
           </p>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mt-1.5 tracking-tight">
@@ -33,7 +33,7 @@ export const Competitive: React.FC = () => {
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 relative z-10">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-blue-50 dark:bg-blue-950/60 border border-blue-200/60 dark:border-blue-900/40 flex items-center justify-center text-blue-600 dark:text-cyan-400 shrink-0 shadow-xs">
-                <CodeforcesIcon className="w-7 h-7" />
+                <CodeforcesIcon className="w-7 h-7" aria-hidden="true" />
               </div>
               <div>
                 <div className="flex flex-wrap items-center gap-2">
@@ -90,7 +90,7 @@ export const Competitive: React.FC = () => {
               className="w-full lg:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-xs sm:text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white shadow-sm transition-all shrink-0 active:scale-95"
             >
               <span>Visit Codeforces</span>
-              <ExternalLink className="w-4 h-4" />
+              <ExternalLink className="w-4 h-4" aria-hidden="true" />
             </a>
           </div>
         </div>
@@ -105,11 +105,11 @@ export const Competitive: React.FC = () => {
               <div>
                 <div className="flex items-center justify-between gap-2 mb-3">
                   <span className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                    {profile.platform === 'Codeforces' && <CodeforcesIcon className="w-4 h-4 text-blue-500" />}
-                    {profile.platform === 'CodeChef' && <CodeChefIcon className="w-4 h-4 text-orange-500" />}
-                    {profile.platform === 'LeetCode' && <LeetCodeIcon className="w-4 h-4 text-amber-500" />}
+                    {profile.platform === 'Codeforces' && <CodeforcesIcon className="w-4 h-4 text-blue-500" aria-hidden="true" />}
+                    {profile.platform === 'CodeChef' && <CodeChefIcon className="w-4 h-4 text-[#5B4638] dark:text-[#c49f87]" aria-hidden="true" />}
+                    {profile.platform === 'LeetCode' && <LeetCodeIcon className="w-4 h-4 text-[#FFA116]" aria-hidden="true" />}
                     {profile.platform !== 'Codeforces' && profile.platform !== 'CodeChef' && profile.platform !== 'LeetCode' && (
-                      <Code2 className="w-4 h-4 text-slate-400" />
+                      <Code2 className="w-4 h-4 text-slate-400" aria-hidden="true" />
                     )}
                     {profile.platform}
                   </span>
@@ -155,7 +155,7 @@ export const Competitive: React.FC = () => {
                   className="w-full inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-full text-xs font-semibold bg-slate-100 hover:bg-blue-600 hover:text-white dark:bg-slate-800 dark:hover:bg-cyan-500 dark:hover:text-slate-950 text-slate-700 dark:text-slate-300 transition-colors"
                 >
                   <span>Open {profile.platform}</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
+                  <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
                 </a>
               </div>
             </div>

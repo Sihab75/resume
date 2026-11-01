@@ -1,5 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Sun, Moon, Menu, X, ArrowUpRight } from 'lucide-react';
+import { 
+  Sun, 
+  Moon, 
+  Menu, 
+  X, 
+  ArrowUpRight, 
+  Home, 
+  User, 
+  Code2, 
+  FolderGit2, 
+  Layers, 
+  GraduationCap, 
+  Trophy, 
+  Mail 
+} from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
 import { personalProfile } from '../data/profile';
 
@@ -56,14 +70,14 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
   }, [mobileMenuOpen]);
 
   const navLinks = [
-    { label: 'Home', href: '#home', id: 'home' },
-    { label: 'About', href: '#about', id: 'about' },
-    { label: 'Skills', href: '#skills', id: 'skills' },
-    { label: 'Projects', href: '#projects', id: 'projects' },
-    { label: 'Focus', href: '#services', id: 'services' },
-    { label: 'Education', href: '#education', id: 'education' },
-    { label: 'Competitive', href: '#competitive', id: 'competitive' },
-    { label: 'Contact', href: '#contact', id: 'contact' },
+    { label: 'Home', href: '#home', id: 'home', icon: Home },
+    { label: 'About', href: '#about', id: 'about', icon: User },
+    { label: 'Skills', href: '#skills', id: 'skills', icon: Code2 },
+    { label: 'Projects', href: '#projects', id: 'projects', icon: FolderGit2 },
+    { label: 'Focus', href: '#services', id: 'services', icon: Layers },
+    { label: 'Education', href: '#education', id: 'education', icon: GraduationCap },
+    { label: 'Competitive', href: '#competitive', id: 'competitive', icon: Trophy },
+    { label: 'Contact', href: '#contact', id: 'contact', icon: Mail },
   ];
 
   return (
@@ -154,9 +168,9 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
               title={theme === 'dark' ? 'Activate Light Mode' : 'Activate Dark Mode'}
             >
               {theme === 'dark' ? (
-                <Sun className="w-4 h-4 text-amber-400 transition-transform duration-300 hover:rotate-45" />
+                <Sun className="w-4 h-4 text-amber-400 transition-transform duration-300 hover:rotate-45" aria-hidden="true" />
               ) : (
-                <Moon className="w-4 h-4 text-slate-700 transition-transform duration-300 hover:-rotate-12" />
+                <Moon className="w-4 h-4 text-slate-700 transition-transform duration-300 hover:-rotate-12" aria-hidden="true" />
               )}
             </button>
 
@@ -166,7 +180,7 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
               className="hidden md:inline-flex items-center gap-1.5 px-4.5 py-2 rounded-full text-xs sm:text-sm font-semibold text-blue-600 dark:text-cyan-400 border border-blue-500/40 dark:border-cyan-500/30 bg-blue-50/50 dark:bg-cyan-950/20 hover:bg-blue-600 hover:text-white dark:hover:bg-cyan-500 dark:hover:text-slate-950 transition-all duration-300 shadow-xs hover:shadow-blue-500/20 active:scale-95 whitespace-nowrap"
             >
               <span>Let's Connect</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
+              <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
             </a>
 
             {/* Mobile Menu Button */}
@@ -178,7 +192,7 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-nav"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5 text-blue-600 dark:text-cyan-400" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? <X className="w-5 h-5 text-blue-600 dark:text-cyan-400" aria-hidden="true" /> : <Menu className="w-5 h-5" aria-hidden="true" />}
             </button>
           </div>
         </div>
@@ -193,6 +207,7 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
           <div className="flex flex-col space-y-1">
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;
+              const Icon = link.icon;
               return (
                 <a
                   key={link.href}
@@ -204,7 +219,10 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
                       : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-blue-600'
                   }`}
                 >
-                  <span>{link.label}</span>
+                  <div className="flex items-center gap-3">
+                    <Icon className={`w-4 h-4 ${isActive ? 'text-blue-600 dark:text-cyan-400' : 'text-slate-400 dark:text-slate-500'}`} aria-hidden="true" />
+                    <span>{link.label}</span>
+                  </div>
                   {isActive && <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-cyan-400" />}
                 </a>
               );

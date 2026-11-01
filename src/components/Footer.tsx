@@ -138,7 +138,7 @@ export const Footer: React.FC = () => {
                 type="button"
                 className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white shadow-md shadow-blue-500/25 transition-all cursor-pointer active:scale-95"
               >
-                <FileDown className="w-4 h-4" />
+                <FileDown className="w-4 h-4" aria-hidden="true" />
                 <span>Download Resume PDF</span>
               </button>
             </div>
@@ -158,7 +158,7 @@ export const Footer: React.FC = () => {
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-blue-500/50 transition-all cursor-pointer shadow-sm"
           >
             <span>Back to top</span>
-            <ArrowUp className="w-3.5 h-3.5" />
+            <ArrowUp className="w-3.5 h-3.5" aria-hidden="true" />
           </button>
         </div>
 

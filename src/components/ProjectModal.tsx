@@ -44,7 +44,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           aria-label="Close modal dialog"
           className="absolute top-4 right-4 sm:top-5 sm:right-5 p-2 rounded-full text-slate-400 hover:text-slate-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
         >
-          <X className="w-5 h-5 text-slate-500 hover:text-blue-600 dark:hover:text-cyan-400" />
+          <X className="w-5 h-5 text-slate-500 hover:text-blue-600 dark:hover:text-cyan-400" aria-hidden="true" />
         </button>
 
         {/* Header */}
@@ -76,7 +76,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
         {/* Tech Stack */}
         <div className="mt-5 sm:mt-6">
           <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 flex items-center gap-1.5 mb-2.5">
-            <Cpu className="w-3.5 h-3.5 text-blue-500 dark:text-cyan-400" />
+            <Cpu className="w-3.5 h-3.5 text-blue-500 dark:text-cyan-400" aria-hidden="true" />
             Technologies Used
           </h4>
           <div className="flex flex-wrap gap-1.5 sm:gap-2">
@@ -94,7 +94,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
         {/* Key Features */}
         <div className="mt-5 sm:mt-6">
           <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 flex items-center gap-1.5 mb-3">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" aria-hidden="true" />
             Core Capabilities & Modules
           </h4>
           <ul className="space-y-2 sm:space-y-2.5">
@@ -111,7 +111,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
         {project.architectureDetails && (
           <div className="mt-5 sm:mt-6">
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 flex items-center gap-1.5 mb-3">
-              <Layers className="w-3.5 h-3.5 text-violet-500" />
+              <Layers className="w-3.5 h-3.5 text-violet-500" aria-hidden="true" />
               Architecture & Implementation Insights
             </h4>
             <div className="space-y-2 rounded-xl bg-slate-50 dark:bg-slate-950/60 p-3 sm:p-4 border border-slate-200/60 dark:border-slate-800">
@@ -145,7 +145,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white shadow-sm transition-all"
             >
               <span>View Live Demo</span>
-              <ExternalLink className="w-4 h-4" />
+              <ExternalLink className="w-4 h-4" aria-hidden="true" />
             </a>
           )}
         </div>

@@ -10,7 +10,7 @@ export const Education: React.FC = () => {
         {/* Section Header */}
         <div className="mb-12">
           <p className="text-xs font-bold tracking-widest uppercase text-blue-600 dark:text-cyan-400 flex items-center gap-1.5">
-            <GraduationCap className="w-3.5 h-3.5" />
+            <GraduationCap className="w-3.5 h-3.5" aria-hidden="true" />
             Academic Foundations
           </p>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mt-1.5 tracking-tight">
@@ -30,14 +30,14 @@ export const Education: React.FC = () => {
                 <div className={`absolute -left-[35px] md:-left-[51px] top-1.5 w-7 h-7 md:w-8 md:h-8 rounded-full border-2 md:border-4 border-white dark:border-[#030712] flex items-center justify-center text-white shadow-md ${
                   item.status === 'Current' ? 'bg-blue-600 animate-pulse' : 'bg-slate-400 dark:bg-slate-700'
                 }`}>
-                  <GraduationCap className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                  <GraduationCap className="w-3.5 h-3.5 md:w-4 md:h-4" aria-hidden="true" />
                 </div>
 
                 {/* Card Container */}
                 <div className="p-6 sm:p-7 rounded-3xl bg-white dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 shadow-xs group-hover:border-blue-500/50 dark:group-hover:border-cyan-500/50 transition-all duration-300">
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                     <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 dark:text-cyan-400">
-                      <Calendar className="w-3.5 h-3.5" />
+                      <Calendar className="w-3.5 h-3.5" aria-hidden="true" />
                       {item.period}
                     </span>
                     <span className={`text-[11px] font-bold px-3 py-0.5 rounded-full ${
@@ -75,7 +75,7 @@ export const Education: React.FC = () => {
                   <ul className="mt-4 space-y-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
                     {item.details.map((detail, idx) => (
                       <li key={idx} className="flex items-start gap-2.5">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                        <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" aria-hidden="true" />
                         <span>{detail}</span>
                       </li>
                     ))}

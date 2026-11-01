@@ -6,7 +6,7 @@ import {
   Globe, 
   Binary, 
   BrainCircuit, 
-  Sparkles
+  Layers
 } from 'lucide-react';
 
 interface ServiceItem {
@@ -25,7 +25,7 @@ export const Services: React.FC = () => {
       title: 'Software Development',
       subtitle: 'C++ & Python Architecture',
       description: 'Writing clean, structured, and modular code with emphasis on solid design principles, memory efficiency, and maintainable software architecture.',
-      icon: <Code2 className="w-6 h-6" />,
+      icon: <Code2 className="w-6 h-6" aria-hidden="true" />,
       tags: ['C++17', 'Python', 'Clean Code', 'OOP Principles']
     },
     {
@@ -33,7 +33,7 @@ export const Services: React.FC = () => {
       title: 'Data Structures & Algorithms',
       subtitle: 'Competitive Problem Solving',
       description: 'Analyzing and implementing optimal solutions using min-heaps, binary trees, dynamic programming, graph traversal, and C++ Standard Template Library (STL).',
-      icon: <Cpu className="w-6 h-6" />,
+      icon: <Cpu className="w-6 h-6" aria-hidden="true" />,
       tags: ['Codeforces', 'LeetCode', 'C++ STL', 'Big-O Analysis']
     },
     {
@@ -41,7 +41,7 @@ export const Services: React.FC = () => {
       title: 'Native Android Engineering',
       subtitle: 'Kotlin & Jetpack Compose',
       description: 'Engineering offline-first mobile applications with declarative Jetpack Compose UI, Room SQLite persistence, state hoisting, and MVVM architecture.',
-      icon: <Smartphone className="w-6 h-6" />,
+      icon: <Smartphone className="w-6 h-6" aria-hidden="true" />,
       tags: ['Kotlin', 'Jetpack Compose', 'Room SQLite', 'Material 3']
     },
     {
@@ -49,7 +49,7 @@ export const Services: React.FC = () => {
       title: 'Web & Interface Engineering',
       subtitle: 'React & Modern Frontend',
       description: 'Developing responsive, accessible single-page web applications using React, TypeScript, Tailwind CSS, and semantic web standards.',
-      icon: <Globe className="w-6 h-6" />,
+      icon: <Globe className="w-6 h-6" aria-hidden="true" />,
       tags: ['React', 'TypeScript', 'Tailwind CSS', 'WCAG A11y']
     },
     {
@@ -57,7 +57,7 @@ export const Services: React.FC = () => {
       title: 'Systems & Data Compression',
       subtitle: 'Lossless Binary Streaming',
       description: 'Implementing custom algorithmic engines from scratch, including greedy Huffman bit-packing compression and cryptographic SHA-256 data verification.',
-      icon: <Binary className="w-6 h-6" />,
+      icon: <Binary className="w-6 h-6" aria-hidden="true" />,
       tags: ['Huffman Coding', 'Bit-Packing', 'File Streaming', 'SHA-256']
     },
     {
@@ -65,7 +65,7 @@ export const Services: React.FC = () => {
       title: 'AI & Machine Learning',
       subtitle: 'Active Exploration & Learning',
       description: 'Studying foundational machine learning concepts, data processing pipelines, algorithmic prediction models, and intelligent AI assistance proxies.',
-      icon: <BrainCircuit className="w-6 h-6" />,
+      icon: <BrainCircuit className="w-6 h-6" aria-hidden="true" />,
       tags: ['Machine Learning', 'Data Preprocessing', 'Model Exploration']
     }
   ];
@@ -77,7 +77,7 @@ export const Services: React.FC = () => {
         {/* Section Header */}
         <div className="mb-12">
           <p className="text-xs font-bold tracking-widest uppercase text-blue-600 dark:text-cyan-400 flex items-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5" />
+            <Layers className="w-3.5 h-3.5" aria-hidden="true" />
             Core Competencies & Capabilities
           </p>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mt-1.5 tracking-tight">

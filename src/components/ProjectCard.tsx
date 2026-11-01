@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink, FolderGit2, Sparkles, Layers } from 'lucide-react';
+import { ExternalLink, FolderGit2, Eye, Layers } from 'lucide-react';
 import { GithubIcon } from './Icons';
 import type { Project } from '../types';
 
@@ -20,7 +20,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenDetails
 
           <div className="flex items-center justify-between z-10">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-white/90 dark:bg-slate-900/90 text-blue-700 dark:text-cyan-300 border border-blue-200/60 dark:border-blue-900/40 shadow-xs">
-              <FolderGit2 className="w-3.5 h-3.5" />
+              <FolderGit2 className="w-3.5 h-3.5" aria-hidden="true" />
               {project.category}
             </span>
             <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-slate-200/70 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
@@ -33,7 +33,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenDetails
               @{project.repoName}
             </span>
             <span className="w-8 h-8 rounded-full bg-blue-600 dark:bg-cyan-500 text-white dark:text-slate-950 flex items-center justify-center shadow-md shadow-blue-500/20 group-hover:scale-110 transition-transform">
-              <Layers className="w-4 h-4" />
+              <Layers className="w-4 h-4" aria-hidden="true" />
             </span>
           </div>
         </div>
@@ -88,7 +88,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenDetails
             onClick={() => onOpenDetails(project)}
             className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-cyan-300 hover:bg-blue-600 hover:text-white dark:hover:bg-cyan-500 dark:hover:text-slate-950 transition-all cursor-pointer active:scale-95 border border-blue-200/60 dark:border-blue-800/60"
           >
-            <Sparkles className="w-3.5 h-3.5" />
+            <Eye className="w-3.5 h-3.5" aria-hidden="true" />
             <span>Details</span>
           </button>
 
@@ -114,7 +114,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenDetails
                 className="p-2 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 hover:bg-cyan-500 hover:text-white transition-colors"
                 title="Live Demo"
               >
-                <ExternalLink className="w-4 h-4" />
+                <ExternalLink className="w-4 h-4" aria-hidden="true" />
               </a>
             )}
           </div>

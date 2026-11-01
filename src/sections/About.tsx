@@ -4,8 +4,7 @@ import {
   GraduationCap, 
   Code2, 
   Trophy, 
-  BookOpen,
-  Sparkles
+  BookOpen
 } from 'lucide-react';
 import { personalProfile } from '../data/profile';
 import { downloadResumePDF } from '../utils/pdfGenerator';
@@ -53,7 +52,7 @@ export const About: React.FC = () => {
             {/* Quick Facts Card */}
             <div className="w-full max-w-sm p-5 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-3">
               <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-blue-500" />
+                <GraduationCap className="w-3.5 h-3.5 text-blue-500" aria-hidden="true" />
                 Quick Academic Identity
               </h4>
               <div className="space-y-2 text-xs sm:text-sm">
@@ -82,7 +81,7 @@ export const About: React.FC = () => {
                   type="button"
                   className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-sm transition-all cursor-pointer active:scale-95"
                 >
-                  <FileDown className="w-3.5 h-3.5" />
+                  <FileDown className="w-3.5 h-3.5" aria-hidden="true" />
                   <span>Download Verified Resume PDF</span>
                 </button>
               </div>
@@ -96,7 +95,7 @@ export const About: React.FC = () => {
             {/* Header */}
             <div>
               <span className="text-blue-600 dark:text-cyan-400 font-bold uppercase tracking-widest text-xs flex items-center gap-1.5">
-                <BookOpen className="w-3.5 h-3.5" />
+                <BookOpen className="w-3.5 h-3.5" aria-hidden="true" />
                 Engineering Background
               </span>
               <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-1.5 tracking-tight">
@@ -128,7 +127,7 @@ export const About: React.FC = () => {
               
               <div className="p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 shadow-xs flex flex-col justify-between hover:border-blue-500/40 transition-colors">
                 <div className="p-2 rounded-xl bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-cyan-400 w-fit mb-2">
-                  <Trophy className="w-5 h-5" />
+                  <Trophy className="w-5 h-5" aria-hidden="true" />
                 </div>
                 <div>
                   <h4 className="text-xl font-bold text-slate-900 dark:text-white">74+ Solved</h4>
@@ -138,7 +137,7 @@ export const About: React.FC = () => {
 
               <div className="p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 shadow-xs flex flex-col justify-between hover:border-violet-500/40 transition-colors">
                 <div className="p-2 rounded-xl bg-violet-50 dark:bg-violet-950/50 text-violet-600 dark:text-violet-400 w-fit mb-2">
-                  <GraduationCap className="w-5 h-5" />
+                  <GraduationCap className="w-5 h-5" aria-hidden="true" />
                 </div>
                 <div>
                   <h4 className="text-xl font-bold text-slate-900 dark:text-white">Batch 251</h4>
@@ -148,7 +147,7 @@ export const About: React.FC = () => {
 
               <div className="p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 shadow-xs flex flex-col justify-between hover:border-cyan-500/40 transition-colors">
                 <div className="p-2 rounded-xl bg-cyan-50 dark:bg-cyan-950/50 text-cyan-600 dark:text-cyan-400 w-fit mb-2">
-                  <Code2 className="w-5 h-5" />
+                  <Code2 className="w-5 h-5" aria-hidden="true" />
                 </div>
                 <div>
                   <h4 className="text-xl font-bold text-slate-900 dark:text-white">C++ & Android</h4>

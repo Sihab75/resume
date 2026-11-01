@@ -21,22 +21,41 @@ interface MarqueeSkill {
   icon: React.ReactNode;
 }
 
+const getCategoryIcon = (categoryId: string) => {
+  switch (categoryId) {
+    case 'programming-languages':
+      return <Code2 className="w-4 h-4 text-blue-600 dark:text-cyan-400 shrink-0" aria-hidden="true" />;
+    case 'frontend-development':
+      return <Layout className="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0" aria-hidden="true" />;
+    case 'backend-development':
+      return <Server className="w-4 h-4 text-indigo-600 dark:text-indigo-400 shrink-0" aria-hidden="true" />;
+    case 'database':
+      return <Database className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" aria-hidden="true" />;
+    case 'tools-platforms':
+      return <Terminal className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" aria-hidden="true" />;
+    case 'cs-fundamentals':
+      return <Binary className="w-4 h-4 text-violet-600 dark:text-violet-400 shrink-0" aria-hidden="true" />;
+    default:
+      return <Code2 className="w-4 h-4 text-blue-600 dark:text-cyan-400 shrink-0" aria-hidden="true" />;
+  }
+};
+
 export const Skills: React.FC = () => {
   const marqueeSkills: MarqueeSkill[] = [
     { name: 'C++17', category: 'Language', icon: <CppIcon className="w-5 h-5 text-blue-500" /> },
-    { name: 'Data Structures & STL', category: 'Algorithms', icon: <Binary className="w-5 h-5 text-cyan-500" /> },
+    { name: 'Data Structures & STL', category: 'Algorithms', icon: <Binary className="w-5 h-5 text-cyan-500" aria-hidden="true" /> },
     { name: 'Kotlin', category: 'Language', icon: <KotlinIcon className="w-5 h-5 text-violet-500" /> },
-    { name: 'Android / Compose', category: 'Mobile', icon: <Smartphone className="w-5 h-5 text-emerald-500" /> },
+    { name: 'Android / Compose', category: 'Mobile', icon: <Smartphone className="w-5 h-5 text-emerald-500" aria-hidden="true" /> },
     { name: 'Python 3', category: 'Language', icon: <PythonIcon className="w-5 h-5 text-amber-500" /> },
-    { name: 'C Language', category: 'Language', icon: <Code2 className="w-5 h-5 text-slate-500" /> },
-    { name: 'Algorithms (Big-O)', category: 'Core CS', icon: <Cpu className="w-5 h-5 text-blue-600" /> },
-    { name: 'Git & GitHub', category: 'Tools', icon: <GitBranch className="w-5 h-5 text-orange-500" /> },
-    { name: 'Room SQLite', category: 'Database', icon: <Database className="w-5 h-5 text-cyan-400" /> },
+    { name: 'C Language', category: 'Language', icon: <Code2 className="w-5 h-5 text-slate-500" aria-hidden="true" /> },
+    { name: 'Algorithms (Big-O)', category: 'Core CS', icon: <Cpu className="w-5 h-5 text-blue-600" aria-hidden="true" /> },
+    { name: 'Git & GitHub', category: 'Tools', icon: <GitBranch className="w-5 h-5 text-orange-500" aria-hidden="true" /> },
+    { name: 'Room SQLite', category: 'Database', icon: <Database className="w-5 h-5 text-cyan-400" aria-hidden="true" /> },
     { name: 'React.js', category: 'Frontend', icon: <ReactIcon className="w-5 h-5 text-cyan-500" /> },
-    { name: 'TypeScript', category: 'Frontend', icon: <FileCode className="w-5 h-5 text-blue-400" /> },
-    { name: 'Tailwind CSS', category: 'Frontend', icon: <Layout className="w-5 h-5 text-teal-400" /> },
-    { name: 'Node.js', category: 'Backend', icon: <Server className="w-5 h-5 text-emerald-600" /> },
-    { name: 'Linux / Terminal', category: 'Systems', icon: <Terminal className="w-5 h-5 text-indigo-400" /> },
+    { name: 'TypeScript', category: 'Frontend', icon: <FileCode className="w-5 h-5 text-blue-400" aria-hidden="true" /> },
+    { name: 'Tailwind CSS', category: 'Frontend', icon: <Layout className="w-5 h-5 text-teal-400" aria-hidden="true" /> },
+    { name: 'Node.js', category: 'Backend', icon: <Server className="w-5 h-5 text-emerald-600" aria-hidden="true" /> },
+    { name: 'Linux / Terminal', category: 'Systems', icon: <Terminal className="w-5 h-5 text-indigo-400" aria-hidden="true" /> },
   ];
 
   const duplicatedSkills = [...marqueeSkills, ...marqueeSkills];
@@ -49,7 +68,7 @@ export const Skills: React.FC = () => {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-10 md:mb-12 gap-4">
           <div>
             <span className="text-blue-600 dark:text-cyan-400 font-bold uppercase tracking-widest text-xs flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-blue-500" />
+              <Sparkles className="w-3.5 h-3.5 text-blue-500" aria-hidden="true" />
               Technical Stack
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mt-1.5 tracking-tight">
@@ -96,8 +115,10 @@ export const Skills: React.FC = () => {
               className="p-6 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 shadow-xs hover:border-blue-500/40 dark:hover:border-cyan-500/40 transition-all duration-300 flex flex-col justify-between h-full"
             >
               <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-cyan-400" />
+                <div className="flex items-center gap-2.5 mb-2">
+                  <div className="p-1 rounded-lg bg-blue-50 dark:bg-blue-950/40 flex items-center justify-center">
+                    {getCategoryIcon(category.id)}
+                  </div>
                   <h3 className="text-base font-bold text-slate-900 dark:text-white">
                     {category.title}
                   </h3>

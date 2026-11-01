@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Send, Check, Copy, MapPin, Phone, Sparkles } from 'lucide-react';
+import { Send, Check, Copy, MapPin, Phone, Mail, Globe } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, WhatsAppIcon } from '../components/Icons';
 import { personalProfile } from '../data/profile';
 
@@ -55,7 +55,7 @@ export const Contact: React.FC = () => {
         {/* Section Header */}
         <div className="mb-12">
           <p className="text-xs font-bold tracking-widest uppercase text-blue-600 dark:text-cyan-400 flex items-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5" />
+            <Mail className="w-3.5 h-3.5" aria-hidden="true" />
             Get In Touch
           </p>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mt-1.5 tracking-tight">
@@ -72,7 +72,7 @@ export const Contact: React.FC = () => {
           <div className="lg:col-span-7 bg-white dark:bg-slate-900/60 rounded-2xl shadow-xs border border-slate-200/80 dark:border-slate-800 p-6 sm:p-8 relative">
             <div className="flex items-center gap-3 mb-6">
               <div className="p-2.5 rounded-xl bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-cyan-400">
-                <Send className="w-5 h-5" />
+                <Send className="w-5 h-5" aria-hidden="true" />
               </div>
               <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
                 Send a Message
@@ -166,7 +166,7 @@ export const Contact: React.FC = () => {
             {personalProfile.isPhonePublic && (
               <div className="bg-white dark:bg-slate-900/60 p-6 rounded-2xl shadow-xs border border-slate-200/80 dark:border-slate-800 hover:border-blue-500/50 dark:hover:border-cyan-500/50 transition-colors flex flex-col items-center text-center">
                 <div className="bg-blue-50 dark:bg-blue-950/50 p-3 rounded-full mb-3 text-blue-600 dark:text-cyan-400">
-                  <Phone className="w-5 h-5" />
+                  <Phone className="w-5 h-5" aria-hidden="true" />
                 </div>
                 <h4 className="font-bold text-slate-900 dark:text-white mb-1 text-sm sm:text-base">
                   Phone & WhatsApp
@@ -191,7 +191,7 @@ export const Contact: React.FC = () => {
                     className="p-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer"
                     title="Copy phone number"
                   >
-                    {copiedPhone ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
+                    {copiedPhone ? <Check className="w-4 h-4 text-emerald-500" aria-hidden="true" /> : <Copy className="w-4 h-4" aria-hidden="true" />}
                   </button>
                 </div>
 
@@ -205,7 +205,7 @@ export const Contact: React.FC = () => {
             {/* University & Location Card */}
             <div className="bg-white dark:bg-slate-900/60 p-6 rounded-2xl shadow-xs border border-slate-200/80 dark:border-slate-800 hover:border-blue-500/50 dark:hover:border-cyan-500/50 transition-colors flex flex-col items-center text-center">
               <div className="bg-blue-50 dark:bg-blue-950/50 p-3 rounded-full mb-3 text-blue-600 dark:text-cyan-400">
-                <MapPin className="w-5 h-5" />
+                <MapPin className="w-5 h-5" aria-hidden="true" />
               </div>
               <h4 className="font-bold text-slate-900 dark:text-white mb-1 text-sm sm:text-base">
                 Location & Campus
@@ -223,9 +223,15 @@ export const Contact: React.FC = () => {
 
             {/* Professional Profiles Card */}
             <div className="bg-white dark:bg-slate-900/60 p-6 rounded-2xl shadow-xs border border-slate-200/80 dark:border-slate-800 hover:border-blue-500/50 dark:hover:border-cyan-500/50 transition-colors flex flex-col items-center text-center">
-              <h4 className="font-bold text-slate-900 dark:text-white mb-3 text-sm sm:text-base">
+              <div className="bg-blue-50 dark:bg-blue-950/50 p-3 rounded-full mb-3 text-blue-600 dark:text-cyan-400">
+                <Globe className="w-5 h-5" aria-hidden="true" />
+              </div>
+              <h4 className="font-bold text-slate-900 dark:text-white mb-1 text-sm sm:text-base">
                 Online Profiles
               </h4>
+              <p className="text-slate-500 dark:text-slate-400 text-xs mb-3">
+                Verified repositories and technical profiles
+              </p>
               <div className="flex items-center gap-2">
                 <a
                   href={personalProfile.githubUrl}
