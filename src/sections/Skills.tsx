@@ -52,7 +52,7 @@ export const Skills: React.FC = () => {
               <Sparkles className="w-3.5 h-3.5 text-blue-500" />
               Technical Stack
             </span>
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-1.5 tracking-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mt-1.5 tracking-tight">
               Skills & <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300">Technologies</span>
             </h2>
           </div>
@@ -93,7 +93,7 @@ export const Skills: React.FC = () => {
           {skillsData.map((category) => (
             <div
               key={category.id}
-              className="p-6 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 shadow-xs hover:border-blue-500/40 dark:hover:border-cyan-500/40 transition-all duration-300 flex flex-col justify-between"
+              className="p-6 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 shadow-xs hover:border-blue-500/40 dark:hover:border-cyan-500/40 transition-all duration-300 flex flex-col justify-between h-full"
             >
               <div>
                 <div className="flex items-center gap-2 mb-2">

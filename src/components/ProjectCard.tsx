@@ -10,7 +10,7 @@ interface ProjectCardProps {
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenDetails }) => {
   return (
-    <div className="group rounded-3xl bg-white dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 shadow-xs hover:border-blue-500/50 dark:hover:border-cyan-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/5 p-6 sm:p-7 flex flex-col justify-between">
+    <div className="group rounded-3xl bg-white dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 shadow-xs hover:border-blue-500/50 dark:hover:border-cyan-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/5 p-6 sm:p-7 flex flex-col justify-between h-full">
       
       <div>
         {/* Top Header / Visual Canvas */}

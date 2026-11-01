@@ -13,10 +13,10 @@ export const Education: React.FC = () => {
             <GraduationCap className="w-3.5 h-3.5" />
             Academic Foundations
           </p>
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-1.5 tracking-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mt-1.5 tracking-tight">
             Education & <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300">Milestones</span>
           </h2>
-          <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed">
+          <p className="mt-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed">
             Formal university coursework in Computer Science & Engineering and pre-university science studies.
           </p>
         </div>

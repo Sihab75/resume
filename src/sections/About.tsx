@@ -23,7 +23,7 @@ export const About: React.FC = () => {
             
             {/* Visual Portrait Card */}
             <div className="w-full max-w-sm rounded-3xl overflow-hidden bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 shadow-md p-3 relative group">
-              <div className="w-full h-64 sm:h-72 rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-950 flex items-center justify-center relative">
+              <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-950 flex items-center justify-center relative">
                 <img
                   src={profileImg}
                   alt={personalProfile.fullName}
@@ -105,7 +105,7 @@ export const About: React.FC = () => {
             </div>
 
             {/* Paragraphs */}
-            <div className="space-y-4 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed text-justify">
+            <div className="space-y-4 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
               <p>
                 I am an undergraduate student in the <strong className="text-slate-900 dark:text-white font-semibold">Department of Computer Science & Engineering</strong> at <strong className="text-slate-900 dark:text-white font-semibold">Green University of Bangladesh</strong> (Batch 251, Student ID: 251002084). My academic coursework has provided me with a rigorous foundation in computational theory, data structures, algorithms, and system design.
               </p>

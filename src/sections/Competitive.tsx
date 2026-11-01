@@ -18,10 +18,10 @@ export const Competitive: React.FC = () => {
             <Trophy className="w-3.5 h-3.5 text-blue-500" />
             Competitive Programming
           </p>
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-1.5 tracking-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mt-1.5 tracking-tight">
             Contests & <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300">Problem Solving</span>
           </h2>
-          <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed">
+          <p className="mt-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed">
             Consistent contest participation and algorithmic practice focusing on data structures and complexity analysis in C++17.
           </p>
         </div>
@@ -100,7 +100,7 @@ export const Competitive: React.FC = () => {
           {competitiveProfilesData.map((profile) => (
             <div
               key={profile.platform}
-              className="flex flex-col justify-between p-6 rounded-3xl bg-white dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 hover:border-blue-500/40 dark:hover:border-cyan-500/40 shadow-xs hover:shadow-md transition-all duration-300"
+              className="flex flex-col justify-between h-full p-6 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 hover:border-blue-500/40 dark:hover:border-cyan-500/40 shadow-xs hover:shadow-md transition-all duration-300"
             >
               <div>
                 <div className="flex items-center justify-between gap-2 mb-3">

@@ -28,7 +28,7 @@ export const Projects: React.FC = () => {
               <FolderGit2 className="w-3.5 h-3.5" />
               Portfolio Showcase
             </span>
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-1.5 tracking-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mt-1.5 tracking-tight">
               Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300">Projects</span>
             </h2>
           </div>

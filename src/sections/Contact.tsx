@@ -49,29 +49,29 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-12 md:py-16 overflow-hidden">
-      <div className="w-[92%] max-w-7xl mx-auto rounded-3xl p-6 sm:p-8 md:p-12 bg-white/70 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200/80 dark:border-slate-800/80 shadow-xl shadow-blue-500/5">
+    <section id="contact" className="py-16 md:py-24 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="mb-10 md:mb-12">
-          <p className="text-xs sm:text-sm font-bold tracking-widest uppercase text-blue-600 dark:text-blue-400 flex items-center gap-1.5">
-            <Sparkles className="w-4 h-4 text-blue-500" />
+        <div className="mb-12">
+          <p className="text-xs font-bold tracking-widest uppercase text-blue-600 dark:text-cyan-400 flex items-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5" />
             Get In Touch
           </p>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mt-2">
-            Let's Work <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500">Together</span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mt-1.5 tracking-tight">
+            Let's Work <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300">Together</span>
           </h2>
-          <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl">
+          <p className="mt-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed">
             Open to software engineering internship opportunities, competitive programming discussions, and collaborative projects.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* Left Column (2 cols on lg): Send a Message Form */}
-          <div className="lg:col-span-2 bg-white/90 dark:bg-slate-950/90 rounded-2xl shadow-sm border border-slate-200/80 dark:border-slate-800 p-6 sm:p-8 relative">
+          {/* Left Column (7 cols on lg): Send a Message Form */}
+          <div className="lg:col-span-7 bg-white dark:bg-slate-900/60 rounded-2xl shadow-xs border border-slate-200/80 dark:border-slate-800 p-6 sm:p-8 relative">
             <div className="flex items-center gap-3 mb-6">
-              <div className="p-2.5 rounded-xl bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400">
+              <div className="p-2.5 rounded-xl bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-cyan-400">
                 <Send className="w-5 h-5" />
               </div>
               <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
@@ -159,13 +159,13 @@ export const Contact: React.FC = () => {
             </form>
           </div>
 
-          {/* Right Column (1 col on lg): Contact Cards */}
-          <div className="flex flex-col gap-6">
+          {/* Right Column (5 cols on lg): Contact Cards */}
+          <div className="lg:col-span-5 flex flex-col gap-5">
             
             {/* Phone & WhatsApp Card */}
             {personalProfile.isPhonePublic && (
-              <div className="bg-white/90 dark:bg-slate-950/90 p-6 sm:p-7 rounded-2xl shadow-sm border border-slate-200/80 dark:border-slate-800 hover:border-blue-500/60 transition-colors flex flex-col items-center text-center">
-                <div className="bg-blue-50 dark:bg-blue-950/50 p-3 rounded-full mb-3 text-blue-600 dark:text-blue-400">
+              <div className="bg-white dark:bg-slate-900/60 p-6 rounded-2xl shadow-xs border border-slate-200/80 dark:border-slate-800 hover:border-blue-500/50 dark:hover:border-cyan-500/50 transition-colors flex flex-col items-center text-center">
+                <div className="bg-blue-50 dark:bg-blue-950/50 p-3 rounded-full mb-3 text-blue-600 dark:text-cyan-400">
                   <Phone className="w-5 h-5" />
                 </div>
                 <h4 className="font-bold text-slate-900 dark:text-white mb-1 text-sm sm:text-base">
@@ -203,8 +203,8 @@ export const Contact: React.FC = () => {
             )}
 
             {/* University & Location Card */}
-            <div className="bg-white/90 dark:bg-slate-950/90 p-6 sm:p-7 rounded-2xl shadow-sm border border-slate-200/80 dark:border-slate-800 hover:border-blue-500/60 transition-colors flex flex-col items-center text-center">
-              <div className="bg-blue-50 dark:bg-blue-950/50 p-3 rounded-full mb-3 text-blue-600 dark:text-blue-400">
+            <div className="bg-white dark:bg-slate-900/60 p-6 rounded-2xl shadow-xs border border-slate-200/80 dark:border-slate-800 hover:border-blue-500/50 dark:hover:border-cyan-500/50 transition-colors flex flex-col items-center text-center">
+              <div className="bg-blue-50 dark:bg-blue-950/50 p-3 rounded-full mb-3 text-blue-600 dark:text-cyan-400">
                 <MapPin className="w-5 h-5" />
               </div>
               <h4 className="font-bold text-slate-900 dark:text-white mb-1 text-sm sm:text-base">
@@ -216,13 +216,13 @@ export const Contact: React.FC = () => {
               <p className="text-slate-500 dark:text-slate-400 text-xs mt-1">
                 {personalProfile.university}
               </p>
-              <p className="text-[11px] font-mono text-blue-600 dark:text-blue-400 mt-0.5">
+              <p className="text-[11px] font-mono text-blue-600 dark:text-cyan-400 mt-0.5">
                 Batch 251 • CSE
               </p>
             </div>
 
             {/* Professional Profiles Card */}
-            <div className="bg-white/90 dark:bg-slate-950/90 p-6 sm:p-7 rounded-2xl shadow-sm border border-slate-200/80 dark:border-slate-800 hover:border-blue-500/60 transition-colors flex flex-col items-center text-center">
+            <div className="bg-white dark:bg-slate-900/60 p-6 rounded-2xl shadow-xs border border-slate-200/80 dark:border-slate-800 hover:border-blue-500/50 dark:hover:border-cyan-500/50 transition-colors flex flex-col items-center text-center">
               <h4 className="font-bold text-slate-900 dark:text-white mb-3 text-sm sm:text-base">
                 Online Profiles
               </h4>

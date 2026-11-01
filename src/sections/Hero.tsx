@@ -154,7 +154,7 @@ export const Hero: React.FC = () => {
               <div className="relative rounded-3xl p-3 sm:p-3.5 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200/90 dark:border-slate-800/90 shadow-2xl shadow-blue-500/10 group-hover:border-blue-500/40 dark:group-hover:border-cyan-500/40 transition-all duration-500">
                 
                 {/* Photo Frame Container */}
-                <div className="relative overflow-hidden rounded-2xl bg-slate-100 dark:bg-slate-950 aspect-[16/11] sm:aspect-[16/10] md:h-80 w-full flex items-center justify-center">
+                <div className="relative overflow-hidden rounded-2xl bg-slate-100 dark:bg-slate-950 aspect-[16/10] w-full flex items-center justify-center">
                   <img
                     src={profileImg}
                     alt={personalProfile.fullName}
