@@ -4,7 +4,8 @@ import { personalProfile } from '../data/profile';
 
 export const TerminalCard: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'cpp' | 'kotlin' | 'info'>('cpp');
-  const [copied, setCopied] = useState(false);
+  const [copyStatus, setCopyStatus] = useState<'copied' | 'error' | null>(null);
+  const tabs = ['cpp', 'kotlin', 'info'] as const;
 
   const cppCode = `// Problem Solver & Software Engineer Mindset
 #include <iostream>
@@ -63,10 +64,25 @@ M  Algorithms/Huffman_Compressor (Python + Trees)`;
 
   const currentCode = activeTab === 'cpp' ? cppCode : activeTab === 'kotlin' ? kotlinCode : infoCode;
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(currentCode);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleTabKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+
+    event.preventDefault();
+    const currentIndex = tabs.indexOf(activeTab);
+    const nextIndex = (currentIndex + (event.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length;
+    const nextTab = tabs[nextIndex];
+    setActiveTab(nextTab);
+    setCopyStatus(null);
+    document.getElementById(`terminal-tab-${nextTab}`)?.focus();
+  };
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(currentCode);
+      setCopyStatus('copied');
+    } catch {
+      setCopyStatus('error');
+    }
   };
 
   return (
@@ -86,9 +102,13 @@ M  Algorithms/Huffman_Compressor (Python + Trees)`;
         {/* Tab switchers */}
         <div className="flex items-center gap-1" role="tablist" aria-label="Code language switchers">
           <button
+            id="terminal-tab-cpp"
             role="tab"
+            aria-controls="terminal-panel"
             aria-selected={activeTab === 'cpp'}
-            onClick={() => setActiveTab('cpp')}
+            tabIndex={activeTab === 'cpp' ? 0 : -1}
+            onKeyDown={handleTabKeyDown}
+            onClick={() => { setActiveTab('cpp'); setCopyStatus(null); }}
             className={`px-2 sm:px-2.5 py-1 text-[11px] sm:text-xs font-mono rounded transition-colors cursor-pointer ${
               activeTab === 'cpp'
                 ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40'
@@ -98,9 +118,13 @@ M  Algorithms/Huffman_Compressor (Python + Trees)`;
             main.cpp
           </button>
           <button
+            id="terminal-tab-kotlin"
             role="tab"
+            aria-controls="terminal-panel"
             aria-selected={activeTab === 'kotlin'}
-            onClick={() => setActiveTab('kotlin')}
+            tabIndex={activeTab === 'kotlin' ? 0 : -1}
+            onKeyDown={handleTabKeyDown}
+            onClick={() => { setActiveTab('kotlin'); setCopyStatus(null); }}
             className={`px-2 sm:px-2.5 py-1 text-[11px] sm:text-xs font-mono rounded transition-colors cursor-pointer ${
               activeTab === 'kotlin'
                 ? 'bg-purple-500/20 text-purple-300 border border-purple-500/40'
@@ -110,9 +134,13 @@ M  Algorithms/Huffman_Compressor (Python + Trees)`;
             Profile.kt
           </button>
           <button
+            id="terminal-tab-info"
             role="tab"
+            aria-controls="terminal-panel"
             aria-selected={activeTab === 'info'}
-            onClick={() => setActiveTab('info')}
+            tabIndex={activeTab === 'info' ? 0 : -1}
+            onKeyDown={handleTabKeyDown}
+            onClick={() => { setActiveTab('info'); setCopyStatus(null); }}
             className={`px-2 sm:px-2.5 py-1 text-[11px] sm:text-xs font-mono rounded transition-colors cursor-pointer ${
               activeTab === 'info'
                 ? 'bg-blue-500/20 text-blue-300 border border-blue-500/40'
@@ -128,14 +156,27 @@ M  Algorithms/Huffman_Compressor (Python + Trees)`;
           onClick={handleCopy}
           aria-label="Copy snippet"
           className="text-slate-400 hover:text-white p-1 rounded hover:bg-slate-800 transition-colors shrink-0 cursor-pointer"
-          title="Copy snippet"
+          title={copyStatus === 'error' ? 'Clipboard access failed' : copyStatus === 'copied' ? 'Snippet copied' : 'Copy snippet'}
         >
-          {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+          {copyStatus === 'copied' ? (
+            <Check className="w-4 h-4 text-emerald-400" />
+          ) : (
+            <Copy className={`w-4 h-4 ${copyStatus === 'error' ? 'text-rose-400' : ''}`} />
+          )}
         </button>
+        <span className="sr-only" role="status" aria-live="polite">
+          {copyStatus === 'copied' ? 'Snippet copied to clipboard.' : copyStatus === 'error' ? 'Could not access the clipboard.' : ''}
+        </span>
       </div>
 
       {/* Terminal Content Body */}
-      <div className="p-3 sm:p-5 font-mono text-xs sm:text-sm text-slate-300 overflow-x-auto leading-relaxed">
+      <div
+        id="terminal-panel"
+        role="tabpanel"
+        aria-labelledby={`terminal-tab-${activeTab}`}
+        tabIndex={0}
+        className="p-3 sm:p-5 font-mono text-xs sm:text-sm text-slate-300 overflow-x-auto leading-relaxed"
+      >
         <pre className="whitespace-pre">
           <code>{currentCode}</code>
         </pre>

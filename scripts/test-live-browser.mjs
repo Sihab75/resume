@@ -1,7 +1,6 @@
 import puppeteer from 'puppeteer-core';
-import fs from 'node:fs';
 
-const CHROME_PATH = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
+const CHROME_PATH = process.env.CHROME_PATH || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 const TARGET_URL = 'https://korimul-portfolio.vercel.app/';
 
 async function runLiveVerification() {
@@ -154,7 +153,8 @@ async function runLiveVerification() {
     assert(modalVisible !== null, 'Project modal dialog opened successfully upon click');
     
     // Close modal
-    const closeBtn = await page.$('button[aria-label="Close dialog"]');
+    const closeBtn = await page.$('button[aria-label="Close modal dialog"]');
+    assert(closeBtn !== null, 'Project modal close button found');
     if (closeBtn) {
       await closeBtn.click();
       await new Promise(r => setTimeout(r, 400));

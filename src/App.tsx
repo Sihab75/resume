@@ -11,22 +11,14 @@ import { Competitive } from './sections/Competitive';
 import { ResumeSection } from './sections/Resume';
 import { Contact } from './sections/Contact';
 import { Footer } from './components/Footer';
+import { WaterDistortion } from './components/WaterDistortion';
 
 export const App: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className="relative min-h-screen bg-[#F8FAFC] dark:bg-[#030712] text-slate-900 dark:text-slate-100 transition-colors duration-300 antialiased overflow-x-hidden selection:bg-blue-500/20 selection:text-blue-600 dark:selection:text-cyan-400">
-      
-      {/* Subtle Background Grid Pattern */}
-      <div className="pointer-events-none fixed inset-0 z-0 bg-grid-pattern opacity-60 dark:opacity-30" />
-
-      {/* Atmospheric Ambient Glow Orbs (Electric Blue, Violet, Cyan) */}
-      <div className="pointer-events-none fixed inset-0 z-0 flex items-center justify-center overflow-hidden">
-        <div className="w-[650px] h-[650px] -top-24 -left-24 absolute rounded-full blur-[140px] bg-blue-500/15 dark:bg-blue-600/10" />
-        <div className="w-[700px] h-[700px] top-1/3 -right-32 absolute rounded-full blur-[150px] bg-violet-500/15 dark:bg-violet-600/10" />
-        <div className="w-[600px] h-[600px] -bottom-24 left-1/4 absolute rounded-full blur-[130px] bg-cyan-500/15 dark:bg-cyan-500/10" />
-      </div>
+    <div className="relative min-h-screen bg-transparent text-slate-900 dark:text-slate-100 transition-colors duration-300 antialiased overflow-x-hidden selection:bg-blue-500/20 selection:text-blue-600 dark:selection:text-cyan-400">
+      <WaterDistortion />
 
       {/* Skip to Main Content Link for Keyboard and Screen Readers */}
       <a

@@ -12,7 +12,8 @@ import {
   Layers, 
   GraduationCap, 
   Trophy, 
-  Mail 
+  Mail,
+  FileText
 } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
 import { personalProfile } from '../data/profile';
@@ -39,7 +40,7 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
       }
 
       // Track active section
-      const sections = ['home', 'skills', 'about', 'projects', 'services', 'education', 'competitive', 'contact'];
+      const sections = ['home', 'skills', 'about', 'projects', 'services', 'education', 'competitive', 'resume', 'contact'];
       const scrollPos = window.scrollY + 140;
 
       for (const section of sections) {
@@ -77,6 +78,7 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
     { label: 'Focus', href: '#services', id: 'services', icon: Layers },
     { label: 'Education', href: '#education', id: 'education', icon: GraduationCap },
     { label: 'Competitive', href: '#competitive', id: 'competitive', icon: Trophy },
+    { label: 'Resume', href: '#resume', id: 'resume', icon: FileText },
     { label: 'Contact', href: '#contact', id: 'contact', icon: Mail },
   ];
 

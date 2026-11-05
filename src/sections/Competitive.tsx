@@ -7,6 +7,12 @@ import { CodeforcesIcon, CodeChefIcon, LeetCodeIcon } from '../components/Icons'
 
 export const Competitive: React.FC = () => {
   const cfStats = useCodeforces(personalProfile.codeforcesHandle);
+  const displayStat = (value: number | string | null) => value ?? (cfStats.loading ? '…' : '—');
+  const apiStatus = cfStats.loading
+    ? 'Loading Codeforces data'
+    : cfStats.error
+      ? 'Live data unavailable'
+      : 'Live profile data';
 
   return (
     <section id="competitive" className="py-16 md:py-24 relative overflow-hidden">
@@ -40,9 +46,21 @@ export const Competitive: React.FC = () => {
                   <span className="text-xs font-mono font-bold uppercase tracking-wider text-blue-600 dark:text-cyan-400">
                     Verified Contest Profile
                   </span>
-                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    Codeforces API Active
+                  <span
+                    role="status"
+                    aria-live="polite"
+                    className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold border ${
+                      cfStats.error
+                        ? 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20'
+                        : cfStats.loading
+                          ? 'bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/20'
+                          : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20'
+                    }`}
+                  >
+                    <span className={`w-1.5 h-1.5 rounded-full ${
+                      cfStats.error ? 'bg-rose-500' : cfStats.loading ? 'bg-amber-500 animate-pulse' : 'bg-emerald-500'
+                    }`} />
+                    {apiStatus}
                   </span>
                 </div>
                 <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-1">
@@ -55,29 +73,32 @@ export const Competitive: React.FC = () => {
             </div>
 
             {/* Stats Metrics Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 bg-slate-50 dark:bg-slate-950/60 p-3 sm:p-4 rounded-2xl border border-slate-200/60 dark:border-slate-800 w-full lg:w-auto">
+            <div
+              aria-busy={cfStats.loading}
+              className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 bg-slate-50 dark:bg-slate-950/60 p-3 sm:p-4 rounded-2xl border border-slate-200/60 dark:border-slate-800 w-full lg:w-auto"
+            >
               <div className="text-center px-2 py-1 bg-white dark:bg-slate-900 rounded-xl sm:bg-transparent shadow-2xs sm:shadow-none">
                 <span className="block text-[11px] text-slate-500 dark:text-slate-400">Current Rating</span>
                 <span className="text-lg sm:text-2xl font-mono font-bold text-blue-600 dark:text-cyan-400">
-                  {cfStats.rating}
+                  {displayStat(cfStats.rating)}
                 </span>
               </div>
               <div className="text-center px-2 py-1 bg-white dark:bg-slate-900 rounded-xl sm:bg-transparent shadow-2xs sm:shadow-none">
                 <span className="block text-[11px] text-slate-500 dark:text-slate-400">Max Rating</span>
                 <span className="text-lg sm:text-2xl font-mono font-bold text-slate-800 dark:text-slate-200">
-                  {cfStats.maxRating}
+                  {displayStat(cfStats.maxRating)}
                 </span>
               </div>
               <div className="text-center px-2 py-1 bg-white dark:bg-slate-900 rounded-xl sm:bg-transparent shadow-2xs sm:shadow-none">
                 <span className="block text-[11px] text-slate-500 dark:text-slate-400">Rank</span>
                 <span className="text-sm sm:text-base font-bold capitalize text-slate-800 dark:text-slate-200">
-                  {cfStats.rank}
+                  {displayStat(cfStats.rank)}
                 </span>
               </div>
               <div className="text-center px-2 py-1 bg-white dark:bg-slate-900 rounded-xl sm:bg-transparent shadow-2xs sm:shadow-none">
-                <span className="block text-[11px] text-slate-500 dark:text-slate-400">Solved Problems</span>
+                <span className="block text-[11px] text-slate-500 dark:text-slate-400">Solved in Last 100</span>
                 <span className="text-lg sm:text-2xl font-mono font-bold text-emerald-600 dark:text-emerald-400">
-                  {cfStats.solvedCount}+
+                  {displayStat(cfStats.solvedCount)}
                 </span>
               </div>
             </div>

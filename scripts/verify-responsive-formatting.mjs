@@ -3,7 +3,7 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 
-const CHROME_PATH = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
+const CHROME_PATH = process.env.CHROME_PATH || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 
 function startDistServer(port = 4175) {
   const mimeTypes = {
@@ -61,10 +61,21 @@ async function verifyResponsiveFormatting() {
   });
 
   const page = await browser.newPage();
+  await page.evaluateOnNewDocument(() => {
+    Object.defineProperty(navigator, 'hardwareConcurrency', { configurable: true, value: 8 });
+    const getContext = HTMLCanvasElement.prototype.getContext;
+    HTMLCanvasElement.prototype.getContext = function(type, options) {
+      return getContext.call(
+        this,
+        type,
+        type === 'webgl' ? { ...options, preserveDrawingBuffer: true } : options
+      );
+    };
+  });
 
   const viewports = [
     { name: 'Desktop', width: 1440, height: 900, isMobile: false },
-    { name: 'Laptop', width: 1280, height: 800, isMobile: false },
+    { name: 'Laptop', width: 1024, height: 900, isMobile: false },
     { name: 'Tablet', width: 768, height: 1024, isMobile: false },
     { name: 'Mobile', width: 375, height: 812, isMobile: true }
   ];
@@ -73,6 +84,151 @@ async function verifyResponsiveFormatting() {
     console.log(`\n--- Testing ${vp.name} (${vp.width}x${vp.height}) ---`);
     await page.setViewport({ width: vp.width, height: vp.height, isMobile: vp.isMobile });
     await page.goto('http://localhost:4175/', { waitUntil: 'networkidle2' });
+
+    const waterLayer = await page.evaluate(() => {
+      const canvas = document.querySelector('.water-distortion-canvas');
+      if (!(canvas instanceof HTMLCanvasElement)) return null;
+      return {
+        mode: canvas.dataset.effect,
+        pointerEvents: window.getComputedStyle(canvas).pointerEvents,
+        position: window.getComputedStyle(canvas).position,
+        zIndex: window.getComputedStyle(canvas).zIndex,
+        ariaHidden: canvas.getAttribute('aria-hidden')
+      };
+    });
+    assert(
+      waterLayer !== null && waterLayer.pointerEvents === 'none' &&
+        waterLayer.ariaHidden === 'true' && waterLayer.position === 'fixed' &&
+        waterLayer.zIndex === '0',
+      `${vp.name}: Full-screen water background stays beneath content and never blocks interaction`
+    );
+    const skillSizing = await page.evaluate(() => {
+      const section = document.querySelector('#skills');
+      if (!section) return null;
+      const technologyCard = section.querySelector('.animate-marquee > div');
+      const technologyName = technologyCard?.querySelector('span');
+      const technologyCategory = technologyCard?.querySelectorAll('span')[1];
+      const technologyIcon = technologyCard?.querySelector('svg');
+      const categoryCards = Array.from(section.querySelectorAll(':scope > div > .grid > div'));
+      const featuredCard = categoryCards[0];
+      const categoryHeading = featuredCard?.querySelector('h3');
+      const skillTag = featuredCard?.querySelector('span');
+      const cardRect = technologyCard?.getBoundingClientRect();
+      const iconRect = technologyIcon?.getBoundingClientRect();
+      return {
+        technologyCard: cardRect ? [cardRect.width, cardRect.height] : null,
+        icon: iconRect ? [iconRect.width, iconRect.height] : null,
+        nameFont: technologyName ? parseFloat(getComputedStyle(technologyName).fontSize) : null,
+        categoryFont: technologyCategory ? parseFloat(getComputedStyle(technologyCategory).fontSize) : null,
+        categoryTitleFont: categoryHeading ? parseFloat(getComputedStyle(categoryHeading).fontSize) : null,
+        categoryCardHeights: categoryCards.slice(0, 3).map(card => card.getBoundingClientRect().height),
+        tagFont: skillTag ? parseFloat(getComputedStyle(skillTag).fontSize) : null
+      };
+    });
+    assert(
+      skillSizing?.technologyCard?.[0] >= 190 && skillSizing.technologyCard[1] >= 154,
+      `${vp.name}: Technology cards render at spacious, full component dimensions`
+    );
+    assert(
+      skillSizing?.icon?.[0] >= 28 && skillSizing.icon[0] <= 34 &&
+        skillSizing.icon[1] >= 28 && skillSizing.icon[1] <= 34,
+      `${vp.name}: Technology icons render between 28px and 34px`
+    );
+    assert(
+      skillSizing?.nameFont >= 16 && skillSizing.nameFont <= 18 &&
+        skillSizing.categoryFont >= 13 && skillSizing.categoryFont <= 14,
+      `${vp.name}: Technology names and category labels use the requested type scale`
+    );
+    assert(
+      skillSizing?.categoryTitleFont >= 18 &&
+        skillSizing.categoryCardHeights.length === 3 &&
+        skillSizing.categoryCardHeights.every(height => height >= 260) &&
+        skillSizing.tagFont >= 13,
+      `${vp.name}: Featured skill categories and technology tags have room to read`
+    );
+    if (vp.width < 768) {
+      assert(waterLayer?.mode === 'fallback', `${vp.name}: Low-power/mobile viewport uses the CSS fallback`);
+    } else {
+      assert(
+        waterLayer?.mode === 'webgl' || waterLayer?.mode === 'fallback',
+        `${vp.name}: WebGL initialized or a graceful fallback is active`
+      );
+    }
+    if (vp.name === 'Desktop') {
+      const firstFrame = await page.evaluate(() => {
+        const canvas = document.querySelector('.water-distortion-canvas');
+        if (!(canvas instanceof HTMLCanvasElement)) return null;
+        const gl = canvas.getContext('webgl');
+        if (!gl || canvas.dataset.effect !== 'webgl') return null;
+        const program = gl.getParameter(gl.CURRENT_PROGRAM);
+        return gl.getUniform(program, gl.getUniformLocation(program, 'uTime'));
+      });
+      await new Promise(resolve => setTimeout(resolve, 180));
+      const stationaryFrame = await page.evaluate(() => {
+        const canvas = document.querySelector('.water-distortion-canvas');
+        const gl = canvas?.getContext('webgl');
+        if (!gl || canvas.dataset.effect !== 'webgl') return null;
+        const program = gl.getParameter(gl.CURRENT_PROGRAM);
+        return gl.getUniform(program, gl.getUniformLocation(program, 'uTime'));
+      });
+      const causticPixels = await page.evaluate(() => {
+        const canvas = document.querySelector('.water-distortion-canvas');
+        const gl = canvas?.getContext('webgl');
+        if (!gl || canvas.dataset.effect !== 'webgl') return null;
+        const pixel = new Uint8Array(4);
+        const samples = [];
+        for (let y = 80; y < canvas.height; y += Math.max(1, Math.floor(canvas.height / 8))) {
+          for (let x = 0; x < canvas.width; x += Math.max(1, Math.floor(canvas.width / 8))) {
+            gl.readPixels(x, y, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, pixel);
+            samples.push(Array.from(pixel.slice(0, 3)));
+          }
+        }
+        const luminances = samples.map(([red, green, blue]) => red * 0.2126 + green * 0.7152 + blue * 0.0722);
+        return Math.max(...luminances) - Math.min(...luminances);
+      });
+      assert(
+        typeof firstFrame === 'number' && typeof stationaryFrame === 'number' &&
+          stationaryFrame > firstFrame,
+        'Desktop: Underwater shader continuously animates while the mouse is stationary'
+      );
+      assert(
+        typeof causticPixels === 'number' && causticPixels > 20,
+        'Desktop: Shader paints varying water light and caustics across the full canvas'
+      );
+
+      await page.mouse.move(vp.width / 2, vp.height / 2);
+      await new Promise(resolve => setTimeout(resolve, 80));
+      await page.mouse.move(vp.width / 2 + 60, vp.height / 2 + 30);
+      await new Promise(resolve => setTimeout(resolve, 120));
+      const rippleResult = await page.evaluate(() => {
+        const canvas = document.querySelector('.water-distortion-canvas');
+        if (!(canvas instanceof HTMLCanvasElement)) return null;
+        const gl = canvas.getContext('webgl');
+        if (!gl || canvas.dataset.effect !== 'webgl') {
+          return { mode: canvas.dataset.effect };
+        }
+
+        const program = gl.getParameter(gl.CURRENT_PROGRAM);
+        const rippleTimes = Array.from({ length: 4 }, (_, index) => {
+          const ripple = gl.getUniform(program, gl.getUniformLocation(program, `uRipples[${index}]`));
+          return ripple[2];
+        });
+        return {
+          mode: canvas.dataset.effect,
+          time: gl.getUniform(program, gl.getUniformLocation(program, 'uTime')),
+          latestRippleTime: Math.max(...rippleTimes),
+          error: gl.getError()
+        };
+      });
+      console.log(`Desktop water renderer: ${rippleResult?.mode}`);
+      assert(
+        rippleResult?.mode === 'webgl' &&
+          rippleResult.error === 0 &&
+          rippleResult.latestRippleTime > 0 &&
+          rippleResult.time - rippleResult.latestRippleTime < 2.8,
+        'Desktop: Mouse movement adds a fresh wave into the continuously animated water'
+      );
+    }
 
     // 1. Check for horizontal overflow (must be 0 horizontal scroll)
     const hasHorizontalOverflow = await page.evaluate((expectedWidth) => {
@@ -165,6 +321,25 @@ async function verifyResponsiveFormatting() {
     }
   }
 
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.touchscreen.tap(180, 240);
+  const mobileWaterFallback = await page.evaluate(() => {
+    const canvas = document.querySelector('.water-distortion-canvas');
+    return canvas ? {
+      mode: canvas.dataset.effect,
+      animation: getComputedStyle(canvas).animationName,
+      background: getComputedStyle(canvas).backgroundImage,
+      pointerEvents: getComputedStyle(canvas).pointerEvents
+    } : null;
+  });
+  assert(
+    mobileWaterFallback?.mode === 'fallback' &&
+      mobileWaterFallback.animation === 'underwater-drift' &&
+      mobileWaterFallback.background !== 'none' &&
+      mobileWaterFallback.pointerEvents === 'none',
+    'Mobile: Animated CSS underwater background remains lightweight and touch-safe'
+  );
+
   // 6. Verify Theme Contrast in Both Modes
   console.log('\n--- Testing Theme Contrast & Persisted Styling ---');
   await page.setViewport({ width: 1280, height: 800 });
@@ -184,6 +359,25 @@ async function verifyResponsiveFormatting() {
 
     assert(darkBg !== lightBg, 'Dark and light modes render distinct computed background colors');
   }
+
+  await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
+  await page.waitForFunction(
+    () => document.querySelector('.water-distortion-canvas')?.dataset.effect === 'disabled'
+  );
+  const reducedMotionHidden = await page.evaluate(() => {
+    const canvas = document.querySelector('.water-distortion-canvas');
+    return canvas ? window.getComputedStyle(canvas).display === 'none' : false;
+  });
+  assert(reducedMotionHidden, 'Reduced-motion preference disables the water effect');
+  await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'no-preference' }]);
+  await page.waitForFunction(
+    () => ['webgl', 'fallback'].includes(document.querySelector('.water-distortion-canvas')?.dataset.effect)
+  );
+  const restoredWaterMode = await page.$eval('.water-distortion-canvas', canvas => canvas.dataset.effect);
+  assert(
+    restoredWaterMode === 'webgl' || restoredWaterMode === 'fallback',
+    'Water effect can be restored after reduced-motion is turned off'
+  );
 
   await browser.close();
   server.close();

@@ -1,6 +1,7 @@
 import React from 'react';
-import { ArrowDown, FileDown, Code2, Sparkles, MapPin, Terminal, Smartphone } from 'lucide-react';
+import { ArrowDown, FileDown, Code2, Sparkles, MapPin, Smartphone } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, CodeforcesIcon, CodeChefIcon, LeetCodeIcon } from '../components/Icons';
+import { TerminalCard } from '../components/TerminalCard';
 import { personalProfile } from '../data/profile';
 import { downloadResumePDF } from '../utils/pdfGenerator';
 import profileImg from '../assets/profile.jpg';
@@ -187,16 +188,8 @@ export const Hero: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Quick Interactive Terminal Banner */}
-                <div className="mt-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200/60 dark:border-slate-800/60 text-xs font-mono">
-                  <div className="flex items-center gap-1.5 text-slate-400 pb-1.5 border-b border-slate-200/50 dark:border-slate-800/50 mb-1.5">
-                    <Terminal className="w-3.5 h-3.5 text-cyan-500" aria-hidden="true" />
-                    <span className="text-[11px] text-slate-500 dark:text-slate-400">terminal@korimul:~$</span>
-                  </div>
-                  <p className="text-slate-700 dark:text-slate-300 text-[11px]">
-                    <span className="text-blue-600 dark:text-cyan-400 font-bold">$ focus: </span>
-                    ["C++", "Algorithms", "Android", "Systems"]
-                  </p>
+                <div className="mt-3">
+                  <TerminalCard />
                 </div>
 
               </div>

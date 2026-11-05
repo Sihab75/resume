@@ -15,10 +15,12 @@ A modern, high-performance personal developer portfolio and interactive ATS-frie
   - **Huffman File Compressor**: From-scratch lossless Huffman Coding algorithmic engine & CustomTkinter desktop GUI in Python 3 with real-time binary prefix tree visualization canvas and SHA-256 integrity verification.
   - **Algorithmic Problem Solving & STL**: Curated repository of competitive programming solutions in modern C++ (74+ verified Codeforces problems).
 - **Competitive Programming Hub**:
-  - Connected with **Codeforces API** for live rating, contest rank, and solved problem counts.
+  - Connected with the **Codeforces API** for live rating, contest rank, and unique problems solved in the latest 100 submissions.
+  - API failures display unavailable values rather than presenting stale defaults as live data.
   - Direct verified profiles for **CodeChef**, **LeetCode**, and upcoming handles for **AtCoder** and **VJudge**.
 - **Interactive Developer Experience**:
   - Hero interactive terminal featuring live C++, Kotlin, and Shell tabs.
+  - A full-screen animated underwater background with WebGL caustics, light rays, mouse-driven waves, a lightweight mobile/CSS fallback, and reduced-motion support.
   - Responsive dark & light mode with persistent user preference.
   - Pure type safety with TypeScript, Vite, and Tailwind CSS.
 - **Privacy & Authenticity**:
@@ -41,8 +43,9 @@ A modern, high-performance personal developer portfolio and interactive ATS-frie
 
 ### Prerequisites
 
-- Node.js (v18.0 or later recommended; tested on v24)
+- Node.js 20.19+ or 22.12+ (required by Vite 8)
 - npm (v9.0 or later)
+- For browser-based verification scripts, set `CHROME_PATH` to your Chrome/Chromium executable if it is not installed at the default Windows path.
 
 ### Installation
 
@@ -115,7 +118,7 @@ Open `src/data/education.ts`:
 The project provides two independent ways to update your resume PDF:
 
 ### Option A: Automatic Node Script Generation
-Whenever you modify `scripts/generate-pdf.js`:
+The Node generator has manually maintained resume content separate from `src/data/`. Update the generator as well as the relevant data files when profile content changes, then run:
 ```bash
 node scripts/generate-pdf.js
 ```

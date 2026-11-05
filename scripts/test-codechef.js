@@ -7,7 +7,6 @@ async function inspectCodeChef() {
     const ratingMatch = text.match(/class="rating-number">([^<]+)<\/div>/);
     const divMatch = text.match(/\((Div\s*\d+)\)/);
     const starMatch = text.match(/class="rating-star"[^>]*>/g);
-    const solvedMatch = text.match(/Fully Solved\s*\(([0-9]+)\)/i) || text.match(/Problems Solved:\s*([0-9]+)/i);
     console.log('CodeChef Rating:', ratingMatch ? ratingMatch[1].trim() : 'N/A');
     console.log('CodeChef Division:', divMatch ? divMatch[1] : 'N/A');
     console.log('CodeChef Stars:', starMatch ? starMatch.length : 'N/A');

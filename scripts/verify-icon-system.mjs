@@ -1,19 +1,23 @@
 import puppeteer from 'puppeteer-core';
 import { spawn } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 
-const CHROME_PATH = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
+const CHROME_PATH = process.env.CHROME_PATH || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 const LOCAL_URL = 'http://localhost:4174';
 
 async function runIconAudit() {
   console.log('=== STARTING ICON SYSTEM AUDIT & VERIFICATION ===');
   console.log('Launching Vite preview server on port 4174...');
 
-  const preview = spawn('cmd.exe', ['/c', 'npx', 'vite', 'preview', '--port', '4174'], {
-    stdio: 'pipe'
+  const preview = spawn(process.execPath, [
+    fileURLToPath(new URL('../node_modules/vite/bin/vite.js', import.meta.url)),
+    'preview',
+    '--port',
+    '4174',
+    '--strictPort'
+  ], {
+    stdio: 'ignore'
   });
-
-  // wait 2 seconds for server to start
-  await new Promise(r => setTimeout(r, 2000));
 
   let passed = 0;
   let failed = 0;
@@ -30,6 +34,24 @@ async function runIconAudit() {
 
   let browser;
   try {
+    let previewReady = false;
+    for (let attempt = 0; attempt < 40; attempt++) {
+      if (preview.exitCode !== null) {
+        throw new Error(`Vite preview exited before starting (code ${preview.exitCode})`);
+      }
+
+      try {
+        const response = await fetch(LOCAL_URL);
+        if (response.ok) {
+          previewReady = true;
+          break;
+        }
+      } catch {
+        await new Promise(resolve => setTimeout(resolve, 250));
+      }
+    }
+    if (!previewReady) throw new Error('Vite preview did not become ready within 10 seconds');
+
     browser = await puppeteer.launch({
       executablePath: CHROME_PATH,
       headless: true,
@@ -101,7 +123,7 @@ async function runIconAudit() {
 
     const mobileNavIcons = await page.$$eval('#mobile-nav a svg', svgs => svgs.length);
     console.log(`Mobile nav link icons found: ${mobileNavIcons}`);
-    assert(mobileNavIcons === 8, `Mobile navigation drawer has icons for all 8 nav items (Found ${mobileNavIcons})`);
+    assert(mobileNavIcons === 9, `Mobile navigation drawer has icons for all 9 nav items (Found ${mobileNavIcons})`);
 
     // Close mobile menu before theme toggle test
     await mobileMenuBtn.click();
@@ -152,9 +174,13 @@ async function runIconAudit() {
     assert(consoleErrors.length === 0, `0 console errors detected during full icon audit (Errors: ${consoleErrors.length})`);
 
     console.log(`\n=== ICON AUDIT COMPLETE: ${passed} PASSED, ${failed} FAILED ===`);
+    if (failed > 0) process.exitCode = 1;
   } finally {
-    if (browser) await browser.close();
-    preview.kill();
+    try {
+      if (browser) await browser.close();
+    } finally {
+      preview.kill();
+    }
   }
 }
 

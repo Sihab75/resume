@@ -4,6 +4,8 @@ import { GithubIcon, LinkedinIcon, CodeforcesIcon, CodeChefIcon } from './Icons'
 import { personalProfile } from '../data/profile';
 import { downloadResumePDF } from '../utils/pdfGenerator';
 
+const currentYear = new Date().getFullYear();
+
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -17,6 +19,7 @@ export const Footer: React.FC = () => {
     { label: 'Services', href: '#services' },
     { label: 'Education', href: '#education' },
     { label: 'Competitive', href: '#competitive' },
+    { label: 'Resume', href: '#resume' },
     { label: 'Contact', href: '#contact' },
   ];
 
@@ -149,7 +152,7 @@ export const Footer: React.FC = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-slate-200/80 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
           <p>
-            © {new Date().getFullYear()} <strong className="text-slate-900 dark:text-white">{personalProfile.fullName}</strong>. Green University of Bangladesh (Batch 251).
+            © {currentYear} <strong className="text-slate-900 dark:text-white">{personalProfile.fullName}</strong>. Green University of Bangladesh (Batch 251).
           </p>
 
           <button

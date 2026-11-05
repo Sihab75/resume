@@ -3,6 +3,11 @@ import { Send, Check, Copy, MapPin, Phone, Mail, Globe } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, WhatsAppIcon } from '../components/Icons';
 import { personalProfile } from '../data/profile';
 
+interface ContactStatus {
+  type: 'success' | 'error';
+  message: string;
+}
+
 export const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -11,25 +16,28 @@ export const Contact: React.FC = () => {
     message: ''
   });
   const [copiedPhone, setCopiedPhone] = useState(false);
-  const [submittedStatus, setSubmittedStatus] = useState<string | null>(null);
+  const [submittedStatus, setSubmittedStatus] = useState<ContactStatus | null>(null);
 
   const cleanPhone = personalProfile.whatsApp.replace(/[^0-9]/g, '');
   const whatsAppUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent('Hello Korimul, I reviewed your developer portfolio and resume.')}`;
 
   const hasEmail = personalProfile.isEmailVerified && personalProfile.email.trim().length > 0;
 
-  const handleCopyPhone = () => {
-    if (personalProfile.isPhonePublic) {
-      navigator.clipboard.writeText(personalProfile.phone);
+  const handleCopyPhone = async () => {
+    try {
+      await navigator.clipboard.writeText(personalProfile.phone);
       setCopiedPhone(true);
-      setTimeout(() => setCopiedPhone(false), 2000);
+      setSubmittedStatus({ type: 'success', message: 'Phone number copied to the clipboard.' });
+    } catch {
+      setCopiedPhone(false);
+      setSubmittedStatus({ type: 'error', message: 'Could not access the clipboard. Please copy the number manually.' });
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!formData.name.trim() || !formData.message.trim()) {
-      alert('Please fill out your name and message.');
+      setSubmittedStatus({ type: 'error', message: 'Please fill out your name and message.' });
       return;
     }
 
@@ -41,10 +49,23 @@ export const Contact: React.FC = () => {
         `Hello Korimul,\n\n${formData.message}\n\nBest regards,\n${formData.name}\nEmail: ${formData.senderEmail || 'Not provided'}`
       );
       window.location.href = `mailto:${personalProfile.email}?subject=${subject}&body=${body}`;
-      setSubmittedStatus('Email client draft launched successfully!');
+      setSubmittedStatus({
+        type: 'success',
+        message: 'Your email app should open with a draft. Review it and send it from your email app.'
+      });
     } else {
-      navigator.clipboard.writeText(fullDraft);
-      setSubmittedStatus('Message draft copied to clipboard! You can also message directly via WhatsApp or LinkedIn.');
+      try {
+        await navigator.clipboard.writeText(fullDraft);
+        setSubmittedStatus({
+          type: 'success',
+          message: 'Message draft copied to the clipboard. Paste it into WhatsApp or LinkedIn to send.'
+        });
+      } catch {
+        setSubmittedStatus({
+          type: 'error',
+          message: 'Could not access the clipboard. Please try WhatsApp or LinkedIn instead.'
+        });
+      }
     }
   };
 
@@ -88,6 +109,7 @@ export const Contact: React.FC = () => {
                   id="contact-name"
                   type="text"
                   placeholder="e.g. John Doe"
+                  autoComplete="name"
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -103,6 +125,7 @@ export const Contact: React.FC = () => {
                   id="contact-email"
                   type="email"
                   placeholder="e.g. john@example.com"
+                  autoComplete="email"
                   value={formData.senderEmail}
                   onChange={(e) => setFormData({ ...formData, senderEmail: e.target.value })}
                   className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all bg-slate-50 dark:bg-slate-900/60 text-slate-900 dark:text-white"
@@ -152,8 +175,16 @@ export const Contact: React.FC = () => {
               </p>
 
               {submittedStatus && (
-                <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 text-xs font-medium border border-emerald-200 dark:border-emerald-800 mt-2">
-                  {submittedStatus}
+                <div
+                  role={submittedStatus.type === 'error' ? 'alert' : 'status'}
+                  aria-live={submittedStatus.type === 'error' ? 'assertive' : 'polite'}
+                  className={`p-3 rounded-xl text-xs font-medium border mt-2 ${
+                    submittedStatus.type === 'error'
+                      ? 'bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-400 border-rose-200 dark:border-rose-800'
+                      : 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800'
+                  }`}
+                >
+                  {submittedStatus.message}
                 </div>
               )}
             </form>
@@ -188,8 +219,9 @@ export const Contact: React.FC = () => {
                   <button
                     onClick={handleCopyPhone}
                     type="button"
+                    aria-label={copiedPhone ? 'Phone number copied' : 'Copy phone number'}
                     className="p-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer"
-                    title="Copy phone number"
+                    title={copiedPhone ? 'Phone number copied' : 'Copy phone number'}
                   >
                     {copiedPhone ? <Check className="w-4 h-4 text-emerald-500" aria-hidden="true" /> : <Copy className="w-4 h-4" aria-hidden="true" />}
                   </button>

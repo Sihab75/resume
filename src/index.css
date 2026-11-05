@@ -8,6 +8,15 @@
 }
 
 @layer base {
+  body {
+    background: linear-gradient(165deg, #d9f8f2 0%, #a8e7e9 48%, #78bed6 100%);
+    background-attachment: fixed;
+  }
+
+  .dark body {
+    background: linear-gradient(165deg, #07546d 0%, #063352 48%, #04142f 100%);
+  }
+
   html {
     scroll-behavior: smooth;
   }
@@ -37,18 +46,47 @@
   }
 }
 
-/* Background Subtle Dot & Grid Patterns */
-.bg-grid-pattern {
-  background-size: 40px 40px;
-  background-image: 
-    linear-gradient(to right, rgba(148, 163, 184, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+.water-distortion-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  display: block;
 }
 
-.dark .bg-grid-pattern {
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+.water-distortion-canvas[data-effect='fallback'] {
+  background-color: #9bdfe5;
+  background-image:
+    linear-gradient(165deg, rgb(225 251 245 / 88%) 0%, rgb(101 194 218 / 52%) 55%, rgb(35 118 170 / 66%) 100%),
+    radial-gradient(ellipse at 32% 0%, rgb(255 255 255 / 54%), transparent 48%),
+    radial-gradient(ellipse at 78% 72%, rgb(35 211 220 / 30%), transparent 56%),
+    repeating-conic-gradient(from 205deg at 28% -8%, transparent 0deg 7deg, rgb(224 255 252 / 18%) 8deg 9deg, transparent 10deg 18deg);
+  background-size: 180% 180%, 130% 130%, 160% 160%, 100% 100%;
+  animation: underwater-drift 32s ease-in-out infinite alternate;
+}
+
+.dark .water-distortion-canvas[data-effect='fallback'] {
+  background-color: #063352;
+  background-image:
+    linear-gradient(165deg, rgb(9 94 119 / 84%) 0%, rgb(6 54 83 / 76%) 55%, rgb(3 19 46 / 90%) 100%),
+    radial-gradient(ellipse at 32% 0%, rgb(101 235 239 / 38%), transparent 48%),
+    radial-gradient(ellipse at 78% 72%, rgb(18 171 199 / 25%), transparent 56%),
+    repeating-conic-gradient(from 205deg at 28% -8%, transparent 0deg 7deg, rgb(177 255 255 / 12%) 8deg 9deg, transparent 10deg 18deg);
+}
+
+.water-distortion-canvas[data-effect='disabled'] {
+  display: none;
+}
+
+@keyframes underwater-drift {
+  0% {
+    background-position: 0% 0%, 0% 0%, 100% 100%, center;
+  }
+  100% {
+    background-position: 100% 100%, 35% 20%, 0% 35%, center;
+  }
 }
 
 /* Infinite Marquee Animation for Technology Skills */
@@ -102,6 +140,11 @@
 
 /* Accessible Reduced Motion Support */
 @media (prefers-reduced-motion: reduce) {
+  .water-distortion-canvas {
+    display: none;
+    animation: none;
+  }
+
   .animate-marquee {
     animation: none;
     overflow-x: auto;

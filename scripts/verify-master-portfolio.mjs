@@ -26,7 +26,7 @@ const distDir = path.resolve('dist');
 const cssFiles = fs.readdirSync(path.join(distDir, 'assets')).filter(f => f.endsWith('.css'));
 assert(cssFiles.length > 0, 'Compiled CSS bundle exists');
 const bundledCss = cssFiles.map(f => fs.readFileSync(path.join(distDir, 'assets', f), 'utf-8')).join('\n');
-const darkSelectors = (bundledCss.match(/:where\(\.dark[^\)]*\)/g) || []).length;
+const darkSelectors = (bundledCss.match(/:where\(\.dark[^)]*\)/g) || []).length;
 assert(darkSelectors >= 50, `Compiled CSS has ${darkSelectors} class-based dark mode selectors (>= 50 required)`);
 
 // 3. Verify fonts & styles in CSS
